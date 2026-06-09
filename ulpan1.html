@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Hebreo 1–8 · Completo</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0d0d;--surface:#161616;--s2:#1e1e1e;--border:#2a2a2a;--gold:#c9a84c;--gdim:#7a6330;--gfaint:rgba(201,168,76,0.06);--text:#e8e0d0;--dim:#6b6355;--ok:#4caf7a;--bad:#c94c4c;--blue:#4c7ac9;--warn:#c9954c;--u1:#c9a84c;--u2:#4c7ac9;--u3:#7ac94c;--u4:#c94c9c;--u5:#4cc9c9;--u6:#c97a4c;--u7:#9c7ac9;--u8:#4caf7a;--u9:#e87d4c;--u11:#4ca8c9;--u12:#c94ca8;--u13:#4cc9a8;--u14:#a84cc9;--u15:#c9494c;--u16:#49c9a8;--u17:#c9a849;--u18:#49a8c9;--u19:#c97ac9;--u10:#e8b86d;--u20:#c9e84c}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px;-webkit-text-size-adjust:100%}
+body::before{content:'אבגדהוזחטיכלמנסעפצקרשת';position:fixed;top:0;left:0;width:100%;height:100%;font-family:'Crimson Pro',serif;font-size:80px;color:rgba(201,168,76,0.02);word-break:break-all;line-height:1;pointer-events:none;z-index:0;letter-spacing:10px}
+.wrap{position:relative;z-index:1;width:100%;max-width:640px;padding-top:16px}
+header{text-align:center;margin-bottom:18px}
+.title{font-family:'Crimson Pro',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.sub{font-size:9px;color:var(--dim);letter-spacing:2px}
+.store-status{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:6px;font-size:9px;letter-spacing:1px}
+.store-dot{width:6px;height:6px;border-radius:50%;background:var(--dim)}.store-dot.active{background:var(--ok)}
+.store-label{color:var(--dim)}
+
+/* TABS - 4 tabs */
+.tabs{display:flex;margin-bottom:16px;border:1px solid var(--border)}
+.tab{flex:1;padding:10px 2px;background:transparent;border:none;border-right:1px solid var(--border);color:var(--dim);font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;line-height:1.5;position:relative;-webkit-tap-highlight-color:transparent}
+.tab:last-child{border-right:none}
+.tab.active{background:var(--gfaint);color:var(--gold)}
+.tbadge{position:absolute;top:3px;right:3px;background:var(--bad);color:#fff;font-size:7px;padding:1px 3px;border-radius:2px}
+
+/* UNIT FILTER */
+.ufilter{display:flex;gap:3px;margin-bottom:12px;flex-wrap:wrap}
+.ubtn{flex:1;min-width:30px;padding:7px 2px;border:1px solid var(--border);background:transparent;color:var(--dim);font-family:'Space Mono',monospace;font-size:8px;cursor:pointer;transition:all .2s;text-transform:uppercase;text-align:center;-webkit-tap-highlight-color:transparent}
+.ubtn.active{border-color:var(--gold);color:var(--gold);background:var(--gfaint)}
+
+/* BANNERS */
+.due-banner{background:rgba(76,175,122,0.08);border:1px solid rgba(76,175,122,0.3);padding:10px 14px;margin-bottom:12px;display:none;align-items:center;gap:10px}
+.due-banner.show{display:flex}
+.due-count{font-family:'Crimson Pro',serif;font-size:20px;color:var(--ok)}
+.due-text{font-size:10px;color:var(--ok);letter-spacing:1px;line-height:1.5}
+.rbanner{background:rgba(201,76,76,0.08);border:1px solid rgba(201,76,76,0.3);padding:10px 14px;margin-bottom:12px;display:none;align-items:center;gap:10px}
+.rbanner.show{display:flex}
+.rcount{font-family:'Crimson Pro',serif;font-size:20px;color:var(--bad)}
+.rtext{font-size:10px;color:var(--bad);letter-spacing:1px;line-height:1.5}
+
+/* PROGRESS */
+.pbar{width:100%;height:2px;background:var(--border);margin-bottom:18px;position:relative}
+.pfill{height:100%;background:var(--gold);transition:width .4s ease}
+.plabel{position:absolute;right:0;top:8px;font-size:10px;color:var(--dim)}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);padding:28px 24px;position:relative;transition:border-color .3s;margin-bottom:12px}
+.card.ok{border-color:var(--ok)}.card.bad{border-color:var(--bad)}
+.card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold)}
+.ubadge{position:absolute;top:10px;right:12px;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:2px 7px;border:1px solid var(--border)}
+.badge-U1{color:var(--u1);border-color:var(--u1)}.badge-U2{color:var(--u2);border-color:var(--u2)}.badge-U3{color:var(--u3);border-color:var(--u3)}.badge-U4{color:var(--u4);border-color:var(--u4)}.badge-U5{color:var(--u5);border-color:var(--u5)}.badge-U6{color:var(--u6);border-color:var(--u6)}.badge-U7{color:var(--u7);border-color:var(--u7)}.badge-U8{color:var(--u8);border-color:var(--u8)}.badge-U9{color:var(--u9);border-color:var(--u9)}.badge-U10{color:var(--u10);border-color:var(--u10)}.badge-U11{color:var(--u11);border-color:var(--u11)}.badge-U12{color:var(--u12);border-color:var(--u12)}.badge-U13{color:var(--u13);border-color:var(--u13)}.badge-U14{color:var(--u14);border-color:var(--u14)}.badge-U15{color:var(--u15);border-color:var(--u15)}.badge-U16{color:var(--u16);border-color:var(--u16)}.badge-U17{color:var(--u17);border-color:var(--u17)}.badge-U18{color:var(--u18);border-color:var(--u18)}.badge-U19{color:var(--u19);border-color:var(--u19)}.badge-U20{color:var(--u20);border-color:var(--u20)}
+.sr-bar{position:absolute;top:0;right:0;width:4px;height:100%;background:var(--border);overflow:hidden}
+.sr-fill{width:100%;position:absolute;bottom:0;transition:height .5s ease}
+.sr-fill.new{background:var(--blue)}.sr-fill.young{background:var(--warn)}.sr-fill.mature{background:var(--ok)}.sr-fill.hard{background:var(--bad)}
+.sr-next{position:absolute;bottom:10px;right:10px;font-size:8px;color:var(--dim);letter-spacing:1px}
+.prompt-lbl{font-size:9px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;margin-bottom:8px}
+.prompt-word{font-family:'Crimson Pro',serif;font-size:38px;font-weight:300;color:var(--text);margin-bottom:4px;line-height:1}
+.prompt-root{font-size:10px;color:var(--blue);letter-spacing:1px;margin-bottom:4px}
+.prompt-hint{font-size:11px;color:var(--dim);margin-bottom:22px;font-style:italic;font-family:'Crimson Pro',serif;min-height:15px}
+.inp-lbl{font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-bottom:5px}
+.hinput{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);padding:8px 0;font-family:'Crimson Pro',serif;font-size:28px;color:var(--gold);text-align:right;direction:rtl;outline:none;caret-color:var(--gold);-webkit-appearance:none;border-radius:0}
+.hinput:focus{border-bottom-color:var(--gdim)}
+.hinput::placeholder{color:var(--dim);font-size:14px}
+.feedback{min-height:22px;margin:10px 0 6px;display:flex;align-items:center;gap:8px;opacity:0;transition:opacity .3s}
+.feedback.show{opacity:1}
+.ficon{font-size:13px}.ftext{font-size:11px;letter-spacing:1px}
+.feedback.fok .ftext{color:var(--ok)}.feedback.fbad .ftext{color:var(--bad)}
+.answer{font-family:'Crimson Pro',serif;font-size:24px;color:var(--ok);direction:rtl;text-align:right;margin-bottom:10px;opacity:0;transition:opacity .3s}
+.answer.show{opacity:1}
+.sr-rating{display:none;gap:6px;margin-top:8px}
+.sr-rating.show{display:flex}
+.rating-lbl{font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;margin-top:8px;display:none}
+.rbtn{flex:1;padding:10px 2px;border:1px solid var(--border);background:transparent;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.rbtn-1{color:var(--bad);border-color:rgba(201,76,76,0.4)}.rbtn-1:active{background:var(--bad);color:var(--bg)}
+.rbtn-2{color:var(--warn);border-color:rgba(201,149,76,0.4)}.rbtn-2:active{background:var(--warn);color:var(--bg)}
+.rbtn-3{color:var(--gold);border-color:rgba(201,168,76,0.4)}.rbtn-3:active{background:var(--gold);color:var(--bg)}
+.rbtn-4{color:var(--ok);border-color:rgba(76,175,122,0.4)}.rbtn-4:active{background:var(--ok);color:var(--bg)}
+.btns{display:flex;gap:7px;margin-top:5px}
+.btn{flex:1;padding:10px;border:1px solid var(--border);background:transparent;color:var(--dim);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.btn:active{border-color:var(--gdim);color:var(--gold)}
+.btn-p{border-color:var(--gdim);color:var(--gold)}.btn-p:active{background:var(--gold);color:var(--bg)}
+.btn-w{border-color:rgba(201,76,76,0.4);color:var(--bad)}.btn-w:active{background:var(--bad);color:var(--bg)}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+.mnem{display:none;background:var(--s2);border:1px solid var(--gdim);margin-top:10px}
+.mnem.show{display:block}
+.mnem-head{padding:10px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.mnem-lbl{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold)}
+.mnem-word{font-family:'Crimson Pro',serif;font-size:16px;color:var(--gold);direction:rtl}
+.mnem-body{padding:14px;font-family:'Crimson Pro',serif;font-size:14px;color:var(--text);line-height:1.9;font-style:italic;min-height:50px}
+.dpulse{display:flex;gap:4px;align-items:center}
+.dpulse span{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:dp 1.2s ease-in-out infinite}
+.dpulse span:nth-child(2){animation-delay:.2s}.dpulse span:nth-child(3){animation-delay:.4s}
+@keyframes dp{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+.stats{display:flex;justify-content:space-between;padding:12px 0 0;border-top:1px solid var(--border)}
+.stat{text-align:center}.stat-n{font-size:18px;color:var(--gold);font-family:'Crimson Pro',serif}
+.stat-n.warn{color:var(--warn)}.stat-l{font-size:8px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
+.complete{display:none;background:var(--surface);border:1px solid var(--gdim);margin-bottom:12px;padding:32px 24px;text-align:center}
+.complete.show{display:block}
+.cscore{font-family:'Crimson Pro',serif;font-size:56px;color:var(--gold);line-height:1;margin-bottom:4px}
+.clbl{font-size:9px;letter-spacing:4px;color:var(--dim);text-transform:uppercase;margin-bottom:14px}
+.cmsg{font-family:'Crimson Pro',serif;font-size:14px;color:var(--dim);font-style:italic;margin-bottom:18px;line-height:1.7}
+.weak-sec{margin-bottom:16px;text-align:left}
+.weak-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--bad);margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid rgba(201,76,76,0.2)}
+.weak-item{background:var(--s2);border:1px solid rgba(201,76,76,0.2);padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.weak-he{font-family:'Crimson Pro',serif;font-size:20px;color:var(--gold);direction:rtl}
+.weak-es{font-size:10px;color:var(--dim)}.weak-sc{font-size:8px;color:var(--bad);letter-spacing:1px;white-space:nowrap}
+.khint{text-align:center;margin-top:10px;font-size:8px;color:var(--dim);letter-spacing:1px}
+.khint span{color:var(--gdim);border:1px solid var(--border);padding:1px 5px;margin:0 2px}
+
+/* ===== GRAMMAR TAB ===== */
+.g-unit-filter{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap}
+.g-ubtn{flex:1;min-width:40px;padding:8px 4px;border:1px solid var(--border);background:transparent;color:var(--dim);font-family:'Space Mono',monospace;font-size:8px;cursor:pointer;transition:all .2s;text-transform:uppercase;text-align:center;-webkit-tap-highlight-color:transparent}
+.g-ubtn.active{border-color:var(--gold);color:var(--gold);background:var(--gfaint)}
+.g-unit-content{display:none}.g-unit-content.active{display:block}
+.g-section{margin-bottom:18px}
+.g-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border)}
+.g-card{background:var(--surface);border:1px solid var(--border);padding:16px;margin-bottom:10px;position:relative}
+.g-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold)}
+.g-tag{display:inline-block;font-size:8px;padding:2px 7px;border:1px solid var(--border);color:var(--dim);letter-spacing:1px;margin-bottom:8px;text-transform:uppercase}
+.g-rule{font-size:12px;color:var(--text);margin-bottom:8px;line-height:1.8;font-family:'Crimson Pro',serif}
+.g-note{font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px}
+.g-warn{font-size:10px;color:var(--bad);line-height:1.7;margin-top:8px;padding:10px;background:rgba(201,76,76,0.06);border:1px solid rgba(201,76,76,0.2)}
+.g-info{font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)}
+.g-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11px}
+.g-table th{padding:7px 8px;border:1px solid var(--border);font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);font-weight:normal;text-align:center}
+.g-table td{padding:9px 8px;border:1px solid var(--border);vertical-align:middle;text-align:center}
+.g-he{font-family:'Crimson Pro',serif;font-size:20px;color:var(--gold);direction:rtl}
+.g-suf{color:var(--warn);font-weight:bold}
+.sofit-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:10px 0}
+.sofit-card{background:var(--gfaint);border:1px solid var(--border);padding:10px 6px;text-align:center}
+.sofit-pair{font-family:'Crimson Pro',serif;font-size:20px;color:var(--gold);direction:rtl;margin-bottom:3px}
+.sofit-name{font-size:8px;color:var(--dim);letter-spacing:1px}
+.sofit-ex{font-size:9px;color:var(--dim);margin-top:3px;font-style:italic}
+.gap-card{background:rgba(201,149,76,0.06);border:1px solid rgba(201,149,76,0.25);padding:14px;margin-bottom:8px}
+.gap-title{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--warn);margin-bottom:6px}
+.gap-text{font-size:11px;color:var(--text);line-height:1.8;font-family:'Crimson Pro',serif}
+.dialog-box{background:var(--s2);border:1px solid var(--border);padding:14px 16px;margin:10px 0}
+.dialog-line{display:flex;gap:10px;margin-bottom:9px;align-items:baseline}
+.dialog-line:last-child{margin-bottom:0}
+.dialog-sp{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);min-width:44px;flex-shrink:0}
+.dialog-he{font-family:'Crimson Pro',serif;font-size:15px;color:var(--text);direction:rtl;text-align:right;flex:1}
+.dialog-es{font-size:9px;color:var(--dim);margin-top:2px}
+.roots-grid{display:flex;flex-direction:column;gap:8px}
+.root-card{background:var(--surface);border:1px solid var(--border);padding:14px 16px;position:relative}
+.root-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold)}
+.root-letters{font-family:'Crimson Pro',serif;font-size:26px;color:var(--gold);direction:rtl;margin-bottom:3px}
+.root-tr{font-size:9px;color:var(--dim);letter-spacing:2px;margin-bottom:7px}
+.root-family{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:6px}
+.root-word{background:var(--gfaint);border:1px solid var(--gdim);padding:3px 8px;font-family:'Crimson Pro',serif;font-size:13px;color:var(--gold);direction:rtl}
+.root-word span{font-size:8px;color:var(--dim);font-family:'Space Mono',monospace;display:block;direction:ltr;text-align:left}
+.root-note{font-size:9px;color:var(--blue);line-height:1.6}
+
+/* SCHEDULE & WEAK TABS */
+.sched-item{background:var(--surface);border:1px solid var(--border);border-bottom:none;padding:12px 14px;position:relative}
+.sched-item:last-child{border-bottom:1px solid var(--border)}
+.sched-item::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--dim)}
+.sched-item.due-now::before{background:var(--ok)}.sched-item.due-soon::before{background:var(--warn)}
+.sched-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
+.sched-he{font-family:'Crimson Pro',serif;font-size:20px;color:var(--gold);direction:rtl}
+.sched-next{font-size:8px;letter-spacing:1px;padding:2px 6px;border:1px solid var(--border)}
+.sched-next.now{color:var(--ok);border-color:rgba(76,175,122,0.4)}.sched-next.soon{color:var(--warn);border-color:rgba(201,149,76,0.4)}.sched-next.later{color:var(--dim)}
+.sched-es{font-size:10px;color:var(--dim);margin-bottom:3px}
+.sched-meta{display:flex;gap:8px;font-size:8px;color:var(--dim);letter-spacing:1px}
+.sched-int{color:var(--blue)}
+.wti{background:var(--surface);border:1px solid var(--border);border-bottom:none;padding:13px 15px;position:relative}
+.wti:last-child{border-bottom:1px solid var(--border)}
+.wti::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--bad)}
+.wti.gen::before{background:var(--gold)}
+.wti-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.wti-he{font-family:'Crimson Pro',serif;font-size:22px;color:var(--gold);direction:rtl}
+.wti-es{font-size:10px;color:var(--dim);margin-bottom:3px}
+.wti-meta{display:flex;gap:7px;font-size:8px;color:var(--dim);letter-spacing:1px}
+.wti-err{color:var(--bad)}.wti-hnt{color:var(--warn)}
+.wti-bar{width:100%;height:3px;background:var(--border);margin-top:6px}
+.wti-bfill{height:100%;background:var(--bad);transition:width .5s}
+.wti-mnem{margin-top:9px;padding-top:9px;border-top:1px solid var(--border);display:none}
+.wti-mnem.show{display:block}
+.wti-mlbl{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.wti-mtext{font-family:'Crimson Pro',serif;font-size:12px;color:var(--text);line-height:1.9;font-style:italic}
+.wti-btn{margin-top:7px;padding:6px 10px;border:1px solid var(--gdim);background:transparent;color:var(--gold);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .2s;-webkit-tap-highlight-color:transparent}
+.wti-btn:active{background:var(--gold);color:var(--bg)}.wti-btn:disabled{opacity:.4;cursor:not-allowed}
+.empty{padding:32px;text-align:center;color:var(--dim);font-size:10px;letter-spacing:1px;line-height:1.8}
+
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.shake{animation:shake .4s ease}
+@keyframes pgold{0%{box-shadow:0 0 0 0 rgba(201,168,76,.3)}100%{box-shadow:0 0 0 12px rgba(201,168,76,0)}}
+.pulse{animation:pgold .5s ease}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.fi{animation:fi .35s ease}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="title">יחידות א׳–י״א · כ׳ · Unidades 1–19, 20</div>
+  <div class="sub">Práctica · Gramática · Agenda SR · Débiles</div>
+  <div class="store-status"><div class="store-dot" id="storeDot"></div><div class="store-label" id="storeLabel">...</div></div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('practice')" id="tbtn-practice">✍<br>Práctica</button>
+  <button class="tab" onclick="switchTab('grammar')" id="tbtn-grammar">◈<br>Gramática</button>
+  <button class="tab" onclick="switchTab('schedule')" id="tbtn-schedule">📅<br>Agenda<span class="tbadge" id="dueBadge" style="display:none">0</span></button>
+  <button class="tab" onclick="switchTab('weak')" id="tbtn-weak">⚠<br>Débiles<span class="tbadge" id="weakBadge" style="display:none">0</span></button>
+</div>
+
+<!-- ===== PRACTICE ===== -->
+<div id="tab-practice">
+  <div class="ufilter">
+    <button class="ubtn active" onclick="setUnit('all')" id="ubtn-all">Todas</button>
+    <button class="ubtn" onclick="setUnit('due')" id="ubtn-due" style="border-color:rgba(76,175,122,0.4);color:var(--ok)">📅</button>
+    <button class="ubtn" onclick="setUnit('u1')" id="ubtn-u1">U1</button>
+    <button class="ubtn" onclick="setUnit('u2')" id="ubtn-u2">U2</button>
+    <button class="ubtn" onclick="setUnit('u3')" id="ubtn-u3">U3</button>
+    <button class="ubtn" onclick="setUnit('u4')" id="ubtn-u4">U4</button>
+    <button class="ubtn" onclick="setUnit('u5')" id="ubtn-u5">U5</button>
+    <button class="ubtn" onclick="setUnit('u6')" id="ubtn-u6">U6</button>
+    <button class="ubtn" onclick="setUnit('u7')" id="ubtn-u7">U7</button>
+    <button class="ubtn" onclick="setUnit('u8')" id="ubtn-u8">U8</button>
+    <button class="ubtn" onclick="setUnit('u9')" id="ubtn-u9">U9</button>
+    <button class="ubtn" onclick="setUnit('u10')" id="ubtn-u10">U10</button>
+    <button class="ubtn" onclick="setUnit('u11')" id="ubtn-u11">U11</button>
+    <button class="ubtn" onclick="setUnit('u12')" id="ubtn-u12">U12</button>
+    <button class="ubtn" onclick="setUnit('u13')" id="ubtn-u13">U13</button>
+    <button class="ubtn" onclick="setUnit('u14')" id="ubtn-u14">U14</button>
+    <button class="ubtn" onclick="setUnit('u15')" id="ubtn-u15">U15</button>
+    <button class="ubtn" onclick="setUnit('u16')" id="ubtn-u16">U16</button>
+    <button class="ubtn" onclick="setUnit('u17')" id="ubtn-u17">U17</button>
+    <button class="ubtn" onclick="setUnit('u18')" id="ubtn-u18">U18</button>
+    <button class="ubtn" onclick="setUnit('u19')" id="ubtn-u19">U19</button>
+    <button class="ubtn" onclick="setUnit('u20')" id="ubtn-u20" style="border-color:rgba(201,232,76,0.4);color:var(--u20)">U20 ★</button>
+    <button class="ubtn" onclick="setUnit('weak')" id="ubtn-weak" style="border-color:rgba(201,76,76,0.4);color:var(--bad)">⚠</button>
+  </div>
+  <div class="due-banner" id="dueBanner"><span style="font-size:18px">📅</span><div><div class="due-count" id="dueCount"></div><div class="due-text">palabras para repasar hoy según SR</div></div></div>
+  <div class="rbanner" id="reinforceBanner"><span style="font-size:16px">⚠</span><div><div class="rcount" id="reinforceCount"></div><div class="rtext">palabras problemáticas · mayor frecuencia</div></div></div>
+  <div class="pbar"><div class="pfill" id="pfill"></div><div class="plabel" id="plabel"></div></div>
+  <div id="practiceCard" class="card">
+    <div class="ubadge" id="ubadge"></div>
+    <div class="sr-bar"><div class="sr-fill" id="srFill" style="height:0%"></div></div>
+    <div class="sr-next" id="srNext"></div>
+    <div class="prompt-lbl">Escribe en hebreo</div>
+    <div class="prompt-word" id="pword"></div>
+    <div class="prompt-root" id="proot"></div>
+    <div class="prompt-hint" id="phint"></div>
+    <div class="inp-lbl">Respuesta →</div>
+    <input class="hinput" id="hinput" placeholder="כתוב כאן..." autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" inputmode="text"/>
+    <div class="feedback" id="feedback"><span class="ficon" id="ficon"></span><span class="ftext" id="ftext"></span></div>
+    <div class="answer" id="answer"></div>
+    <div class="rating-lbl" id="ratingLbl">¿Cómo te resultó?</div>
+    <div class="sr-rating" id="srRating">
+      <button class="rbtn rbtn-1" onclick="rate(1)">✗ Nada</button>
+      <button class="rbtn rbtn-2" onclick="rate(2)">∼ Difícil</button>
+      <button class="rbtn rbtn-3" onclick="rate(3)">◎ Bien</button>
+      <button class="rbtn rbtn-4" onclick="rate(4)">✓ Fácil</button>
+    </div>
+    <div class="btns" id="mainBtns">
+      <button class="btn" id="btnHint" onclick="doHint()">Pista</button>
+      <button class="btn btn-p" id="btnCheck" onclick="doCheck()">Verificar</button>
+      <button class="btn btn-p" id="btnNext" onclick="doNext()" style="display:none">Siguiente →</button>
+    </div>
+    <div class="mnem" id="mnemPanel">
+      <div class="mnem-head"><span class="mnem-lbl">Mnemónico · IA</span><span class="mnem-word" id="mnemWord"></span></div>
+      <div id="mnemBody"></div>
+    </div>
+  </div>
+  <div id="completeScreen" class="complete">
+    <div class="cscore" id="cscore"></div>
+    <div class="clbl">palabras correctas</div>
+    <div class="cmsg" id="cmsg"></div>
+    <div class="weak-sec" id="weakSummary" style="display:none"><div class="weak-title">Palabras problemáticas</div><div id="weakList"></div></div>
+    <button class="btn btn-p" style="width:100%;margin-bottom:8px" onclick="restart()">Repetir ronda</button>
+    <button class="btn btn-w" style="width:100%;margin-bottom:8px;display:none" id="btnRepWeak" onclick="repeatWeak()">Solo las débiles</button>
+    <button class="btn" style="width:100%;margin-bottom:8px" onclick="startDue()">📅 Agenda SR</button>
+    <button class="btn" style="width:100%" onclick="restartShuffle()">Aleatorio</button>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-n" id="sCorr">0</div><div class="stat-l">Correctas</div></div>
+    <div class="stat"><div class="stat-n warn" id="sWrong">0</div><div class="stat-l">Errores</div></div>
+    <div class="stat"><div class="stat-n" id="sHints">0</div><div class="stat-l">Pistas</div></div>
+    <div class="stat"><div class="stat-n" id="sStreak">0</div><div class="stat-l">Racha</div></div>
+  </div>
+  <div class="khint"><span>Enter</span> verificar &nbsp;·&nbsp; <span>Tab</span> siguiente</div>
+</div>
+
+<!-- ===== GRAMMAR ===== -->
+<div id="tab-grammar" style="display:none">
+  <div class="g-unit-filter">
+    <button class="g-ubtn active" onclick="showGUnit('g-all')" id="gbtn-all">Todo</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u1')" id="gbtn-u1">U1</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u2')" id="gbtn-u2">U2</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u3')" id="gbtn-u3">U3</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u4')" id="gbtn-u4">U4</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u5')" id="gbtn-u5">U5</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u6')" id="gbtn-u6">U6</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u7')" id="gbtn-u7">U7</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u8')" id="gbtn-u8">U8</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u9')" id="gbtn-u9">U9</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u10')" id="gbtn-u10">U10</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u11')" id="gbtn-u11">U11</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u12')" id="gbtn-u12">U12</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u13')" id="gbtn-u13">U13</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u14')" id="gbtn-u14">U14</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u15')" id="gbtn-u15">U15</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u16')" id="gbtn-u16">U16</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u17')" id="gbtn-u17">U17</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u18')" id="gbtn-u18">U18</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u19')" id="gbtn-u19">U19</button>
+    <button class="g-ubtn" onclick="showGUnit('g-u20')" id="gbtn-u20">U20 ★</button>
+    <button class="g-ubtn" onclick="showGUnit('g-roots')" id="gbtn-roots">Raíces</button>
+  </div>
+
+  <!-- U1 -->
+  <div class="g-unit-content active" id="g-all">
+    <div style="font-size:10px;color:var(--dim);letter-spacing:1px;line-height:1.8;margin-bottom:12px">Seleccioná una unidad para ver su teoría, vacíos pedagógicos y raíces.</div>
+  </div>
+
+  <div class="g-unit-content" id="g-u1">
+    <div class="g-section">
+      <div class="g-title">U1 · Alfabeto y pronombres — lo que Rosen no dice</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen presenta el alfabeto como lista de formas sin articular que el hebreo es un idioma consonántico: las raíces son siempre consonantes, las vocales modifican función y significado. Sin este principio, todo lo que viene después parece arbitrario.</div></div>
+      <div class="g-card">
+        <div class="g-tag">oración nominal — sin verbo ser</div>
+        <div class="g-rule">El hebreo no usa verbo "ser" en presente. La oración nominal es la estructura base: sujeto + predicado sin cópula.</div>
+        <table class="g-table"><tr><th>Hebreo</th><th>Literal</th><th>Español</th></tr>
+        <tr><td class="g-he">אֲנִי דָּוִד</td><td>yo David</td><td>Yo soy David</td></tr>
+        <tr><td class="g-he">אַתָּה מוֹרֶה</td><td>tú maestro</td><td>Tú eres maestro</td></tr></table>
+        <div class="g-note">El verbo "ser" existe (הָיָה) pero solo en pasado y futuro. En presente: silencio = ser.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">género en pronombres — regla invertida</div>
+        <div class="g-rule">Al contrario del español: אַתָּה (atá) = tú masculino · אַתְּ (at) = tú femenino. La forma más larga es masculina.</div>
+        <div class="g-warn">Error frecuente: invertir el género. אַתָּה tiene dagesh en el ת y termina en ה. אַתְּ termina en ת con shvá.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-unit-content" id="g-u2">
+    <div class="g-section">
+      <div class="g-title">U2 · Nikud y letras ג·ד·ה·ו</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen introduce el Nikud sin explicar por qué existe: el hebreo es consonántico, las vocales cambian función gramatical. Sin entender esto, el Nikud parece decorativo. Además, la ו (vav) tiene triple función: consonante /v/, marcador vocal "o" y marcador vocal "u" — Rosen no lo articula.</div></div>
+      <div class="g-card">
+        <div class="g-tag">sistema Nikud — lógica</div>
+        <div class="g-rule">Las vocales se escriben como puntos y líneas debajo, sobre o dentro de las consonantes. En texto moderno cotidiano no aparecen — solo en textos religiosos, poesía y material educativo.</div>
+        <table class="g-table">
+          <tr><th>Vocal</th><th>Signo</th><th>Nombre</th><th>Ejemplo</th></tr>
+          <tr><td>a</td><td class="g-he">בַ</td><td>Pataj</td><td class="g-he">גַּב</td></tr>
+          <tr><td>e</td><td class="g-he">בֶ</td><td>Segol</td><td class="g-he">יֶלֶד</td></tr>
+          <tr><td>i</td><td class="g-he">בִ</td><td>Jirik</td><td class="g-he">יָד</td></tr>
+          <tr><td>o</td><td class="g-he">בֹ</td><td>Jolam</td><td class="g-he">טוֹב</td></tr>
+          <tr><td>u</td><td class="g-he">בוּ</td><td>Shuruk</td><td class="g-he">בּוּבָה</td></tr>
+        </table>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">ו (vav) — triple función</div>
+        <div class="g-rule">La vav es la letra más funcional del hebreo: como consonante suena /v/, como marcador vocálico puede indicar "o" (jolam) o "u" (shuruk). El contexto y el nikud determinan cuál es.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-unit-content" id="g-u3">
+    <div class="g-section">
+      <div class="g-title">U3 · Pronombres 3ª persona y preposición מ...</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen presenta el cambio מִ → מֵ ante guturales como excepción fonética aislada, sin nombrar el sistema: las 5 guturales (א ה ח ר ע) no toleran shvá audible y fuerzan apertura vocálica. Este patrón reaparece en toda la conjugación verbal.</div></div>
+      <div class="g-card">
+        <div class="g-tag">pronombres personales — 6 formas</div>
+        <table class="g-table">
+          <tr><th>Persona</th><th>Hebreo</th><th>Transliteración</th></tr>
+          <tr><td>yo</td><td class="g-he">אֲנִי</td><td>ani</td></tr>
+          <tr><td>tú (m.)</td><td class="g-he">אַתָּה</td><td>atá</td></tr>
+          <tr><td>tú (f.)</td><td class="g-he">אַתְּ</td><td>at</td></tr>
+          <tr><td>él</td><td class="g-he">הוּא</td><td>hu</td></tr>
+          <tr><td>ella</td><td class="g-he">הִיא</td><td>hi</td></tr>
+        </table>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">preposición מ... adherida</div>
+        <div class="g-rule">La preposición "de/desde" se adhiere a la siguiente palabra. Ante guturales (א ה ח ר ע) cambia de מִ a מֵ porque las guturales no toleran shvá audible.</div>
+        <table class="g-table">
+          <tr><th>Normal</th><th>Ante gutural</th></tr>
+          <tr><td class="g-he">מִיִּשְׂרָאֵל</td><td class="g-he">מֵאַמֶרִיקָה</td></tr>
+          <tr><td>de Israel</td><td>de América (א gutural)</td></tr>
+        </table>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">género en sustantivos — sufijo ה</div>
+        <div class="g-rule">El femenino de personas y animales se forma agregando ה: תַּלְמִיד → תַּלְמִידָה (alumno/a) · מוֹרֶה → מוֹרָה (maestro/a)</div>
+        <div class="g-note">Excepción: מוֹרֶה/מוֹרָה termina en ה en ambos géneros — solo la vocal cambia. El nikud diferencia.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-unit-content" id="g-u4">
+    <div class="g-section">
+      <div class="g-title">U4 · Letras ז·ח·ט·י — pares ortográficos</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen no advierte que ח/כ suenan igual en hebreo moderno (/j/), y que ט/ת suenan igual (/t/). Tampoco explica que la י tiene doble función: consonante /y/ y marcador de vocal larga "i". Sin esto el alumno comete errores ortográficos sistemáticos.</div></div>
+      <div class="g-card">
+        <div class="g-tag">par ח vs כ — mismo sonido /j/</div>
+        <div class="g-warn">Ambas suenan /j/ en hebreo moderno. La escritura correcta depende SOLO de la raíz. No hay atajo fonético — hay que aprenderlo por vocabulario.</div>
+        <div class="g-rule" style="margin-top:8px">ח: אָח (hermano) · חַג (fiesta) · טַבָּח (cocinero)<br>כ: כֶּלֶב (perro) · כֵּן (sí) · מֶלֶךְ (rey)</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">par ט vs ת — mismo sonido /t/</div>
+        <div class="g-warn">En hebreo bíblico había diferencia fonética. En moderno ambas suenan /t/. La escritura depende de la raíz.</div>
+        <div class="g-rule" style="margin-top:8px">ט: טוֹב (bueno) · טַבָּח (cocinero) · טֶלֶפוֹן<br>ת: תּוֹדָה (gracias) · תַּלְמִיד (alumno)</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">י (yod) — doble función</div>
+        <div class="g-rule">Como consonante: suena /y/ al inicio de sílaba → יָד (mano).<br>Como marcador vocálico: indica vocal larga "i" sin pronunciarse → דִּין (ley/juicio).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-unit-content" id="g-u5">
+    <div class="g-section">
+      <div class="g-title">U5 · Dagesh y letra ל</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen presenta el dagesh mecánicamente sin explicar que el sistema ב·כ·פ es el único en hebreo donde la posición determina la pronunciación. Tampoco conecta כֵּן (U1) con el dagesh — el alumno ya conocía el patrón sin saberlo.</div></div>
+      <div class="g-card">
+        <div class="g-tag">sistema Dagesh — ב·כ·פ</div>
+        <div class="g-rule">Solo 3 letras tienen doble pronunciación según el dagesh (punto interno):</div>
+        <table class="g-table">
+          <tr><th>Letra</th><th>Con dagesh · plosiva</th><th>Sin dagesh · fricativa</th></tr>
+          <tr><td class="g-he">בּ / ב</td><td>/b/ — בַּיִת</td><td>/v/ — אָב</td></tr>
+          <tr><td class="g-he">כּ / כ</td><td>/k/ — כֶּלֶב</td><td>/j/ — מֶלֶךְ</td></tr>
+          <tr><td class="g-he">פּ / פ</td><td>/p/ — פֶּה</td><td>/f/ — כֶּסֶף</td></tr>
+        </table>
+        <div class="g-info">Regla posicional: inicio de palabra → siempre plosiva. Final → siempre fricativa. Préstamos son excepción.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">ל como preposición adherida</div>
+        <div class="g-rule">La ל (lamed) suena /l/ invariable. Como morfema adherido significa "para / a": לְיֶלֶד (para el niño) · לְתֵל אָבִיב (a Tel Aviv).</div>
+        <div class="g-note">Patrón: מ (de) · ל (para) · ב (en) — las 3 preposiciones cortas del hebreo. Todas adheridas.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-unit-content" id="g-u6">
+    <div class="g-section">
+      <div class="g-title">U6 · Primera conjugación y letras finales</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen presenta el presente como conjugación sin explicar que en hebreo es un participio activo — no "yo estudio" (acción ligada al sujeto) sino "yo [soy] estudiante" (estado). Por eso no marca persona. También introduce מ/ם y נ/ן sin nombrar que el sistema completo tiene 5 letras finales.</div></div>
+      <div class="g-card">
+        <div class="g-tag">presente pa'al — participio activo</div>
+        <div class="g-rule">El presente hebreo no marca persona — solo género y número. La forma masculina singular es la base:</div>
+        <table class="g-table">
+          <tr><th>Pronombres</th><th>Forma</th><th>Sufijo</th></tr>
+          <tr><td>אני·אתה·הוא</td><td class="g-he">לוֹמֵד</td><td>—</td></tr>
+          <tr><td>אני·את·היא</td><td class="g-he">לוֹמֶד<span class="g-suf">ת</span></td><td class="g-suf">+ת</td></tr>
+          <tr><td>אנחנו·אתם·הם</td><td class="g-he">לוֹמְד<span class="g-suf">ִים</span></td><td class="g-suf">+ים</td></tr>
+          <tr><td>אנחנו·אתן·הן</td><td class="g-he">לוֹמְד<span class="g-suf">וֹת</span></td><td class="g-suf">+ות</td></tr>
+        </table>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">letras finales — sistema completo</div>
+        <div class="sofit-grid">
+          <div class="sofit-card"><div class="sofit-pair">מ→ם</div><div class="sofit-name">Mem</div><div class="sofit-ex">שָׁלוֹם</div></div>
+          <div class="sofit-card"><div class="sofit-pair">נ→ן</div><div class="sofit-name">Nun</div><div class="sofit-ex">יַיִן</div></div>
+          <div class="sofit-card"><div class="sofit-pair">כ→ך</div><div class="sofit-name">Kaf</div><div class="sofit-ex">מֶלֶךְ</div></div>
+          <div class="sofit-card"><div class="sofit-pair">פ→ף</div><div class="sofit-name">Pe</div><div class="sofit-ex">כֶּסֶף</div></div>
+          <div class="sofit-card"><div class="sofit-pair">צ→ץ</div><div class="sofit-name">Tsadi</div><div class="sofit-ex">מִיץ</div></div>
+        </div>
+        <div class="g-note">Solo cambia la forma, no el sonido ni la función.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-unit-content" id="g-u7">
+    <div class="g-section">
+      <div class="g-title">U7 · ס·ע·פ — guturales completas y sistema ב·כ·פ</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen introduce la ע sin advertir que es gutural faríngea — no existe en español. En hebreo moderno suena como alef (silencio), pero hay que escribirla correctamente. También presenta ס sin señalar que 3 letras suenan /s/ (ס, שׂ, צ en algunos contextos) — mismo patrón ortográfico que ח/כ y ט/ת.</div></div>
+      <div class="g-card">
+        <div class="g-tag">5 guturales — sistema completo</div>
+        <div style="font-family:'Crimson Pro',serif;font-size:32px;color:var(--gold);direction:rtl;letter-spacing:8px;text-align:center;margin:10px 0">א · ה · ח · ר · ע</div>
+        <div class="g-rule">Estas 5 letras comparten una propiedad: producidas en garganta/faringe, no toleran shvá audible. Consecuencias: מִ→מֵ ante gutural (U3) · cambios vocálicos en conjugación verbal · ח nunca lleva dagesh.</div>
+        <div class="g-info">Con U7 el set está completo. Cada regla fonológica que involucre guturales ya la podés reconocer.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">פ completa el sistema ב·כ·פ</div>
+        <table class="g-table">
+          <tr><th>Sistema completo</th><th>Plosiva</th><th>Fricativa</th></tr>
+          <tr><td class="g-he">ב</td><td>/b/ בַּיִת</td><td>/v/ אָב</td></tr>
+          <tr><td class="g-he">כ</td><td>/k/ כֶּלֶב</td><td>/j/ מֶלֶךְ</td></tr>
+          <tr><td class="g-he">פ</td><td>/p/ פֶּה</td><td>/f/ אַף</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="g-unit-content" id="g-u8">
+    <div class="g-section">
+      <div class="g-title">U8 · Preposición ב, segundo patrón femenino, diálogo</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen introduce ב... sin mostrar que completa el sistema de 3 preposiciones adheridas (מ·ל·ב). Tampoco articula que גָּרָה usa un segundo patrón de femenino (+ה en lugar de +ת) que aplica específicamente a raíces lamed-he — esto es estructuralmente importante para binyanim futuros.</div></div>
+      <div class="g-card">
+        <div class="g-tag">sistema de preposiciones adheridas — completo</div>
+        <table class="g-table">
+          <tr><th>Prep.</th><th>Significado</th><th>Pregunta</th><th>Ejemplo</th></tr>
+          <tr><td class="g-he">מ...</td><td>de / desde</td><td class="g-he">מֵאֵיפֹה</td><td class="g-he">מִיִּשְׂרָאֵל</td></tr>
+          <tr><td class="g-he">ל...</td><td>para / a</td><td class="g-he">לְאָן</td><td class="g-he">לְתֵל אָבִיב</td></tr>
+          <tr><td class="g-he">ב...</td><td>en / dentro de</td><td class="g-he">אֵיפֹה</td><td class="g-he">בְּלוֹנְדוֹן</td></tr>
+        </table>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">dos patrones de femenino singular</div>
+        <table class="g-table">
+          <tr><th>Patrón</th><th>Masc.</th><th>Fem.</th><th>Cuándo</th></tr>
+          <tr><td>+ ת</td><td class="g-he">לוֹמֵד</td><td class="g-he">לוֹמֶדֶת</td><td>Mayoría de verbos pa'al</td></tr>
+          <tr><td>+ ה</td><td class="g-he">גָּר</td><td class="g-he">גָּרָה</td><td>Raíces lamed-he (3ª letra = ה)</td></tr>
+        </table>
+        <div class="g-note">La regla: si la raíz termina en ה → femenino agrega ה. Si termina en consonante → agrega ת.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">diálogo integrador U1–U8</div>
+        <div class="dialog-box">
+          <div class="dialog-line"><div class="dialog-sp">Ilan</div><div><div class="dialog-he">?את מי ,שלום</div><div class="dialog-es">Hola, ¿quién eres?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Lisa</div><div><div class="dialog-he">.ליסה אני</div><div class="dialog-es">Soy Lisa.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Ilan</div><div><div class="dialog-he">?את מאיפה</div><div class="dialog-es">¿De dónde eres?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Lisa</div><div><div class="dialog-he">?אתה מאיפה .מספרד אני</div><div class="dialog-es">Soy de España. ¿Y tú?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Ilan</div><div><div class="dialog-he">.מישראל אני</div><div class="dialog-es">Soy de Israel.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Lisa</div><div><div class="dialog-he">!עברית לומדת אני ?מישראל אתה</div><div class="dialog-es">¡Eres de Israel! Estudio hebreo.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Ilan</div><div><div class="dialog-he">?מורה אתה איפה ...לעברית מורה ואני</div><div class="dialog-es">Y soy maestro de hebreo... ¿Dónde enseñás?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Lisa</div><div><div class="dialog-he">!!!מאוד נעים .באינטרנט לעברית תלמידה אני</div><div class="dialog-es">¡Soy estudiante de hebreo por internet! ¡Mucho gusto!</div></div></div>
+        </div>
+        <div class="g-note">Este diálogo usa estructuras de U1–U8. Si podés producirlo sin ver el hebreo, las bases están consolidadas.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U9 -->
+  <div class="g-unit-content" id="g-u9">
+    <div class="g-section">
+      <div class="g-title">U9 · Últimas 4 letras — alfabeto completo</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen no señala que U9 cierra el alfabeto hebreo — después de aquí no hay más letras nuevas. Es un hito estructural. También omite que שׁ (shin) y שׂ (sin) son la misma letra con un punto diferente, y que en hebreo moderno ambas suenan /sh/ — la distinción /s/ del bíblico prácticamente desapareció. La regla ט/ת en préstamos es la más útil de la unidad y Rosen la da bien.</div></div>
+      <div class="g-card">
+        <div class="g-tag">4 letras nuevas — cierre del alfabeto</div>
+        <table class="g-table">
+          <tr><th>Letra</th><th>Nombre</th><th>Sonido</th><th>Ejemplo</th></tr>
+          <tr><td class="g-he">ק</td><td>Kof</td><td>/k/ — siempre plosiva, sin dagesh</td><td class="g-he">קוֹקוֹס — coco</td></tr>
+          <tr><td class="g-he">ר</td><td>Resh</td><td>/r/ — gutural (5ª gutural)</td><td class="g-he">רֹאשׁ — cabeza</td></tr>
+          <tr><td class="g-he">שׁ / שׂ</td><td>Shin / Sin</td><td>שׁ = /sh/ · שׂ = /s/ (formal) o /sh/ (coloquial)</td><td class="g-he">שֶׁמֶשׁ · שָׂפָה</td></tr>
+          <tr><td class="g-he">ת</td><td>Tav</td><td>/t/ — igual que ט en moderno</td><td class="g-he">תּוֹרָה · בַּיִת</td></tr>
+        </table>
+        <div class="g-info" style="font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)"><strong>Hito:</strong> Con U9 conocés las 22 letras del alfabeto hebreo completo. Todo lo que sigue es gramática y vocabulario — no hay más letras nuevas.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">ק vs כּ — mismo sonido /k/, ortografía diferente</div>
+        <div class="g-rule">La ק siempre suena /k/ — no tiene dagesh ni forma fricativa. La כּ suena /k/ solo con dagesh (al inicio de palabra). Sin dagesh, כ suena /j/.</div>
+        <table class="g-table">
+          <tr><th>Letra</th><th>Sonido</th><th>Ejemplo</th></tr>
+          <tr><td class="g-he">ק</td><td>/k/ siempre</td><td class="g-he">קִילוֹ · שֶׁקֶל · קוֹקוֹס</td></tr>
+          <tr><td class="g-he">כּ</td><td>/k/ solo con dagesh</td><td class="g-he">כֶּלֶב · כֵּן</td></tr>
+          <tr><td class="g-he">כ / ך</td><td>/j/ sin dagesh</td><td class="g-he">מֶלֶךְ · אֶחָד</td></tr>
+        </table>
+        <div class="g-warn" style="font-size:10px;color:var(--bad);line-height:1.7;margin-top:8px;padding:10px;background:rgba(201,76,76,0.06);border:1px solid rgba(201,76,76,0.2)">Tercer par ortográfico del curso: ק/כּ para /k/. Mismo patrón que ח/כ para /j/ y ט/ת para /t/ — la escritura depende de la raíz.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">ט vs ת en préstamos del inglés — regla práctica</div>
+        <div class="g-rule">En palabras de origen extranjero hay una convención: ט transcribe la /t/ regular · ת transcribe el "th" del inglés.</div>
+        <table class="g-table">
+          <tr><th>Inglés</th><th>Hebreo</th><th>Letra</th><th>Por qué</th></tr>
+          <tr><td>student</td><td class="g-he">סְטוּדֶנְט</td><td>ט</td><td>/t/ regular</td></tr>
+          <tr><td>theater</td><td class="g-he">תֵּאַטְרוֹן</td><td>ת</td><td>"th" inglés</td></tr>
+          <tr><td>mathematics</td><td class="g-he">מַתֵּמַטִיקָה</td><td>ת y ט</td><td>"th" → ת · /t/ → ט</td></tr>
+        </table>
+        <div class="g-note">Esta es la única regla fonética que distingue ט y ת — y solo aplica a préstamos. En palabras hebreas originales no hay regla: hay que memorizar por raíz.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">אִישׁ / אִשָּׁה — raíz compartida</div>
+        <div class="g-rule">Hombre y mujer parecen palabras sin relación, pero comparten la raíz semítica א-נ-ש (humanidad). El plural אֲנָשִׁים recupera la nun que el singular perdió.</div>
+        <div style="font-family:'Crimson Pro',serif;direction:rtl;text-align:right;font-size:18px;color:var(--gold);line-height:2.4;margin:10px 0">
+          אִישׁ — hombre (sg.)<br>
+          אִשָּׁה — mujer (sg.)<br>
+          אֲנָשִׁים — hombres (pl.)<br>
+          נָשִׁים — mujeres (pl.)
+        </div>
+        <div class="g-note">En Génesis 2:23: "Esta será llamada אִשָּׁה porque del אִישׁ fue tomada." El texto bíblico juega con la relación fonética entre ambas palabras — relación que solo se ve en hebreo.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U10 -->
+  <div class="g-unit-content" id="g-u10">
+    <div class="g-section">
+      <div class="g-title">U10 · Pronombres demostrativos — זֶה·זֹאת·אֵלֶּה</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen menciona que מַה זֶּה usa siempre masculino "porque no se sabe el género de antemano" — pero no lo articula como principio: el masculino es el género no marcado en hebreo, funciona como forma por defecto en toda la gramática. Tampoco señala que מַה שְׁלוֹמְךָ introduce por primera vez los sufijos posesivos (ְךָ = tuyo masc. · ֵךְ = tuyo fem.) sin nombrarlo como sistema.</div></div>
+      <div class="g-card">
+        <div class="g-tag">pronombres demostrativos — 3 formas</div>
+        <div class="g-rule">Los demostrativos en hebreo corresponden a "este/esta/estos/estas". Se usan en oraciones nominales — sin verbo ser.</div>
+        <table class="g-table">
+          <tr><th>Forma</th><th>Hebreo</th><th>Uso</th><th>Ejemplo</th></tr>
+          <tr><td>este (m.sg.)</td><td class="g-he">זֶה</td><td>ze</td><td class="g-he">זֶה דָּוִד — este es David</td></tr>
+          <tr><td>esta (f.sg.)</td><td class="g-he">זֹאת</td><td>zot</td><td class="g-he">זֹאת עוּגָה — esta es una torta</td></tr>
+          <tr><td>estos/estas (pl.)</td><td class="g-he">אֵלֶּה</td><td>ele</td><td class="g-he">אֵלֶּה יְלָדִים — estos son niños</td></tr>
+        </table>
+        <div class="g-note">Conexión con U1: la oración nominal (sin verbo ser) que aprendiste en U1 con pronombres personales (אֲנִי דָּוִד) funciona exactamente igual con demostrativos.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">מַה זֶּה — masculino como género neutro</div>
+        <div class="g-rule">La pregunta ¿qué es esto? usa siempre זֶה (masculino) porque el género del objeto es desconocido. El masculino es el género no marcado — es la forma por defecto cuando el género no está determinado.</div>
+        <table class="g-table">
+          <tr><th>Pregunta</th><th>Hebreo</th><th>Cuándo</th></tr>
+          <tr><td>¿qué es esto?</td><td class="g-he">?מַה זֶּה</td><td>siempre — objeto desconocido</td></tr>
+          <tr><td>¿quién es este?</td><td class="g-he">?מִי זֶה</td><td>persona masculina</td></tr>
+          <tr><td>¿quién es esta?</td><td class="g-he">?מִי זֹאת</td><td>persona femenina</td></tr>
+        </table>
+        <div class="g-info" style="font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)"><strong>מִי vs מַה:</strong> מִי (mi) = siempre personas · מַה (ma) = cosas y conceptos. Esta distinción reaparece en cláusulas relativas y construcciones complejas futuras.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">מַה שְׁלוֹמְךָ — sufijos posesivos (anticipo)</div>
+        <div class="g-rule">Rosen introduce esta pregunta como frase fija. En realidad es שָׁלוֹם (paz/bienestar) + sufijo posesivo:</div>
+        <table class="g-table">
+          <tr><th>Forma</th><th>Hebreo</th><th>Sufijo</th><th>A quién</th></tr>
+          <tr><td>ma shlomjá</td><td class="g-he">?מַה שְׁלוֹמְךָ</td><td>ְךָ = tuyo</td><td>masc.</td></tr>
+          <tr><td>ma shlomej</td><td class="g-he">?מַה שְׁלוֹמֵךְ</td><td>ֵךְ = tuyo</td><td>fem.</td></tr>
+        </table>
+        <div class="g-note">El sistema completo tiene 7 sufijos posesivos. Los irás viendo en unidades siguientes — ya conocés los primeros dos sin haberlos estudiado formalmente.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROOTS -->
+  <div class="g-unit-content" id="g-u20">
+    <div class="g-section">
+      <div class="g-title">U20 · יֵשׁ / אֵין — hay / no hay</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen presenta שֵׁי/אֵין como "hay/no hay" sin explicar la distinción fundamental: en hebreo hay dos sistemas de "ser". הוּא/הִיא son cópulas de identidad (X es Y). שֵׁי/אֵין son cópulas de existencia (X existe/no existe). Tampoco articula que שֵׁי/אֵין son invariables — nunca se conjugan, sin importar si el sujeto es singular, plural, masculino o femenino. Y no menciona que la concordancia de adjetivos requiere también concordar en definitud (ה) — gap que explota en U21.</div></div>
+      <div class="g-card">
+        <div class="g-tag">existencial · no se conjuga</div>
+        <div class="g-rule">שֵׁי y אֵין son invariables. No cambian con género, número ni persona.</div>
+        <table class="g-table">
+          <tr><th>Hebreo</th><th>Transliteración</th><th>Español</th></tr>
+          <tr><td class="g-he">יֵשׁ קָפֶה</td><td>yesh kafé</td><td>Hay café</td></tr>
+          <tr><td class="g-he">אֵין תּוֹרָה</td><td>ein torá</td><td>No hay Torá</td></tr>
+          <tr><td class="g-he">יֵשׁ מִסְעָדוֹת</td><td>yesh mis'adot</td><td>Hay restaurantes</td></tr>
+          <tr><td class="g-he">אֵין שְׁנִיצֶל</td><td>ein shnitsel</td><td>No hay milanesa</td></tr>
+        </table>
+        <div class="g-info" style="font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)"><strong>Diferencia clave:</strong> שֵׁי = "hay" (existe) vs. הוּא = "es" (identidad). En español ambos se expresan con "ser/haber" pero en hebreo son sistemas distintos que nunca se mezclan.</div>
+      </div>
+    </div>
+
+    <div class="g-section">
+      <div class="g-title">U20 · Adjetivos — concordancia de género y número</div>
+      <div class="g-card">
+        <div class="g-tag">morfología · 4 formas</div>
+        <div class="g-rule">En hebreo el adjetivo va DESPUÉS del sustantivo (inverso al español) y concuerda en género y número.</div>
+        <table class="g-table">
+          <tr><th></th><th>Masc. sg.</th><th>Fem. sg.</th><th>Masc. pl.</th><th>Fem. pl.</th></tr>
+          <tr><td>grande</td><td class="g-he">גָּדוֹל</td><td class="g-he">גְּדוֹלָה</td><td class="g-he">גְּדוֹלִים</td><td class="g-he">גְּדוֹלוֹת</td></tr>
+          <tr><td>pequeño</td><td class="g-he">קָטָן</td><td class="g-he">קְטַנָּה</td><td class="g-he">קְטַנִּים</td><td class="g-he">קְטַנּוֹת</td></tr>
+          <tr><td>bueno</td><td class="g-he">טוֹב</td><td class="g-he">טוֹבָה</td><td class="g-he">טוֹבִים</td><td class="g-he">טוֹבוֹת</td></tr>
+          <tr><td>excelente</td><td class="g-he">מְצֻיָּן</td><td class="g-he">מְצֻיֶּנֶת</td><td class="g-he">מְצֻיָּנִים</td><td class="g-he">מְצֻיָּנוֹת</td></tr>
+        </table>
+        <div class="g-warn" style="font-size:10px;color:var(--bad);line-height:1.7;margin-top:8px;padding:10px;background:rgba(201,76,76,0.06);border:1px solid rgba(201,76,76,0.2)"><strong>Error frecuente en español:</strong> "restaurante grande" → en hebreo es הַמִּסְעָדָה הַגְּדוֹלָה (la restaurante la-grande). El artículo ה se repite en el adjetivo. Rosen no lo trabaja aquí — aparece en U21.</div>
+      </div>
+    </div>
+
+    <div class="g-section">
+      <div class="g-title">U20 · Vocabulario de restaurante — contexto de clase</div>
+      <div class="g-card">
+        <div class="g-tag">vocabulario activo · diálogos</div>
+        <div class="dialog-box">
+          <div class="dialog-line"><div class="dialog-sp">Meltsar</div><div><div class="dialog-he">?הֶחְלַטְתֶּם</div><div class="dialog-es">¿Decidieron?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Víctor</div><div><div class="dialog-he">.שְׁנִיצֶל הֶצֶר ינא</div><div class="dialog-es">Quiero milanesa.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Meltsar</div><div><div class="dialog-he">!עַכְשָׁיו שְׁנִיצֶל אֵין</div><div class="dialog-es">¡Ahora no hay milanesa!</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Víctor</div><div><div class="dialog-he">?כְּרִיךְ יֵשׁ אוּלַי</div><div class="dialog-es">¿Tal vez hay sándwich?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Meltsar</div><div><div class="dialog-he">.טוּנָה עִם כְּרִיךְ יֵשׁ</div><div class="dialog-es">Hay sándwich con atún.</div></div></div>
+        </div>
+        <div class="g-note">Este diálogo usa exactamente las estructuras de U20: שֵׁי/אֵין + vocabulario de restaurante + אוּלַי (tal vez) de U17. Si podés producirlo sin ver el hebreo, la unidad está consolidada.</div>
+      </div>
+    </div>
+
+    <div class="g-section">
+      <div class="g-title">U20 · Raíz מ-ס-ע-ד — restaurante y banquete</div>
+      <div class="g-card">
+        <div class="g-tag">raíz · léxico cultural</div>
+        <div class="g-rule">מִסְעָדָה (restaurante) viene de סְעוּדָה (seudá = comida/banquete).</div>
+        <div style="font-family:'Crimson Pro',serif;direction:rtl;text-align:right;font-size:16px;color:var(--gold);line-height:2.4;margin:10px 0">
+          מִסְעָדָה — restaurante<br>
+          סְעוּדָה — comida ceremonial / banquete<br>
+          סְעוּדַת שַׁבָּת — cena del Shabat<br>
+          סְעוּדַת פּוּרִים — banquete de Purim
+        </div>
+        <div class="g-note">El restaurante en hebreo es literalmente "el lugar del banquete". La raíz conecta lo cotidiano del menú con el ritual de la mesa sagrada.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U11 -->
+  <div class="g-unit-content" id="g-u11">
+    <div class="g-section">
+      <div class="g-title">U11 · Plural — sufijos ים- y ות-</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen no conecta el artículo הַ con la concordancia de adjetivos que viene en U20. Si consolidás bien U11, U20 se facilita: הַיֶּלֶד הַגָּדוֹל (el niño el-grande) — el artículo se repite en el adjetivo. También omite que los plurales irregulares tienen lógica etimológica: אִישׁ → אֲנָשִׁים recupera la raíz א-נ-ש de U9. Y no distingue los dos "de": מ = origen (de Israel), שֶׁל = posesión (el libro de Ruti).</div></div>
+      <div class="g-card">
+        <div class="g-tag">regla general — sufijos de plural</div>
+        <div class="g-rule">El plural hebreo tiene dos sufijos principales. El masculino plural recibe ים- (-im) y el femenino plural recibe ות- (-ot). Cuando el singular femenino termina en ה, esa ה se elimina antes de agregar ות-.</div>
+        <table class="g-table">
+          <tr><th>Género</th><th>Singular</th><th>Plural</th><th>Sufijo</th></tr>
+          <tr><td>masc.</td><td class="g-he">דִּימלֶת · תַּלְמִיד</td><td class="g-he">תַּלְמִידִים</td><td>+ים</td></tr>
+          <tr><td>masc.</td><td class="g-he">סֵפֶר</td><td class="g-he">סְפָרִים</td><td>+ים (con cambio vocálico)</td></tr>
+          <tr><td>fem.</td><td class="g-he">תַּלְמִידָה</td><td class="g-he">תַּלְמִידוֹת</td><td>ה→ות</td></tr>
+          <tr><td>fem.</td><td class="g-he">עוּגָה</td><td class="g-he">עוּגוֹת</td><td>ה→ות</td></tr>
+        </table>
+        <div class="g-info" style="font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)"><strong>Excepción con lógica:</strong> algunos sustantivos masculinos toman ות- y femeninos toman ים- (שֻׁלְחָן → שֻׁלְחָנוֹת). Hay que aprender el plural de cada palabra — no siempre es predecible.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">plurales irregulares — lógica etimológica</div>
+        <table class="g-table">
+          <tr><th>Singular</th><th>Plural</th><th>Por qué</th></tr>
+          <tr><td class="g-he">אִישׁ</td><td class="g-he">אֲנָשִׁים</td><td>recupera raíz א-נ-ש (U9)</td></tr>
+          <tr><td class="g-he">אִשָּׁה</td><td class="g-he">נָשִׁים</td><td>misma raíz א-נ-ש</td></tr>
+          <tr><td class="g-he">יֶלֶד</td><td class="g-he">יְלָדִים</td><td>cambio vocálico e→a</td></tr>
+          <tr><td class="g-he">הַמּוֹרֶה</td><td class="g-he">מוֹרִים / מוֹרוֹת</td><td>masc/fem idéntico en sg. — plural los distingue</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U11 · Artículo definido הַ... — adherido, sin género</div>
+      <div class="g-card">
+        <div class="g-tag">morfema adherido · sin género ni número</div>
+        <div class="g-rule">הַ (ha) = el/la/los/las. Una sola forma para todo. Se adhiere directamente a la palabra — igual que מ, ל, ב.</div>
+        <table class="g-table">
+          <tr><th>Sin artículo</th><th>Con artículo</th><th>Español</th></tr>
+          <tr><td class="g-he">יֶלֶד</td><td class="g-he">הַיֶּלֶד</td><td>el niño</td></tr>
+          <tr><td class="g-he">יְלָדִים</td><td class="g-he">הַיְלָדִים</td><td>los niños</td></tr>
+          <tr><td class="g-he">מִסְעָדָה</td><td class="g-he">הַמִּסְעָדָה</td><td>el restaurante</td></tr>
+        </table>
+        <div class="g-note">Conexión U20: הַמִּסְעָדָה הַגְּדוֹלָה (el restaurante el-grande). El artículo se repite en el adjetivo. Sin consolidar הַ de U11, ese patrón no funciona.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U11 · שֶׁל vs מ — dos tipos de "de"</div>
+      <div class="g-card">
+        <div class="g-tag">preposiciones · distinción semántica</div>
+        <table class="g-table">
+          <tr><th>Preposición</th><th>Significado</th><th>Ejemplo</th></tr>
+          <tr><td class="g-he">מ...</td><td>origen / procedencia</td><td class="g-he">מִיִּשְׂרָאֵל — de Israel (origen)</td></tr>
+          <tr><td class="g-he">שֶׁל</td><td>posesión / pertenencia</td><td class="g-he">הַסֵּפֶר שֶׁל רוּתִי — el libro de Ruti</td></tr>
+        </table>
+        <div class="g-warn" style="font-size:10px;color:var(--bad);line-height:1.7;margin-top:8px;padding:10px;background:rgba(201,76,76,0.06);border:1px solid rgba(201,76,76,0.2)">En español ambos son "de". En hebreo son sistemas distintos que no se intercambian. "Soy de Israel" = מִיִּשְׂרָאֵל (origen). "El libro de Israel" = הַסֵּפֶר שֶׁל יִשְׂרָאֵל (posesión).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U12 -->
+  <div class="g-unit-content" id="g-u12">
+    <div class="g-section">
+      <div class="g-title">U12 · Tabla de pronombres completa — cierre del sistema</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen presenta los pronombres plurales como contenido nuevo sin señalar que cierran el sistema que empezó en U1. La conjugación plural del presente usa el mismo sufijo ים- de los sustantivos de U11 — Rosen los presenta como fenómenos separados cuando son el mismo morfema. Los sonidos 'ג/'ז/'צ no son hebreos nativos — solo aparecen en préstamos del francés, inglés y árabe. En hebreo bíblico no existen.</div></div>
+      <div class="g-card">
+        <div class="g-tag">10 pronombres — sistema completo</div>
+        <table class="g-table">
+          <tr><th>Persona</th><th>Masc.</th><th>Fem.</th><th>Transliteración</th></tr>
+          <tr><td>1ª sg.</td><td class="g-he" colspan="2">אֲנִי</td><td>ani — yo</td></tr>
+          <tr><td>2ª sg.</td><td class="g-he">אַתָּה</td><td class="g-he">אַתְּ</td><td>atá / at — tú</td></tr>
+          <tr><td>3ª sg.</td><td class="g-he">הוּא</td><td class="g-he">הִיא</td><td>hu / hi — él / ella</td></tr>
+          <tr><td>1ª pl.</td><td class="g-he" colspan="2">אֲנַחְנוּ</td><td>anajnu — nosotros/as</td></tr>
+          <tr><td>2ª pl.</td><td class="g-he">אַתֶּם</td><td class="g-he">אַתֶּן</td><td>atem / aten — vosotros/as</td></tr>
+          <tr><td>3ª pl.</td><td class="g-he">הֵם</td><td class="g-he">הֵן</td><td>hem / hen — ellos / ellas</td></tr>
+        </table>
+        <div class="g-info" style="font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)"><strong>El sistema cerró:</strong> אֲנִי (U1) → אַתָּה/אַתְּ/הוּא/הִיא (U1–U3) → אֲנַחְנוּ/אַתֶּם/אַתֶּן/הֵם/הֵן (U12). Ahora tenés los 10 pronombres del hebreo.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U12 · Conjugación plural en presente</div>
+      <div class="g-card">
+        <div class="g-tag">mismo morfema que plural de sustantivos — U11</div>
+        <div class="g-rule">El sufijo ים- del plural masculino de sustantivos (יְלָדִים) es el mismo del plural masculino de verbos (לוֹמְדִים). No son fenómenos separados — es el mismo sistema morfológico.</div>
+        <table class="g-table">
+          <tr><th>Pronombres</th><th>למד</th><th>גר</th></tr>
+          <tr><td>אני·אתה·הוא</td><td class="g-he">לוֹמֵד</td><td class="g-he">גָּר</td></tr>
+          <tr><td>אני·את·היא</td><td class="g-he">לוֹמֶדֶת</td><td class="g-he">גָּרָה</td></tr>
+          <tr><td>אנחנו·אתם·הם</td><td class="g-he">לוֹמְדִים</td><td class="g-he">גָּרִים</td></tr>
+          <tr><td>אנחנו·אתן·הן</td><td class="g-he">לוֹמְדוֹת</td><td class="g-he">גָּרוֹת</td></tr>
+        </table>
+        <div class="g-note">Regla: el presente hebreo no marca persona — solo género y número. Cualquier pronombre masculino (אני/אתה/הוא) usa la misma forma. Cualquier pronombre femenino (אני/את/היא) usa la forma femenina.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U12 · Sonidos con apóstrofe — préstamos</div>
+      <div class="g-card">
+        <div class="g-tag">no son hebreos nativos</div>
+        <table class="g-table">
+          <tr><th>Letra</th><th>Sonido</th><th>Ejemplo</th><th>Origen</th></tr>
+          <tr><td class="g-he">'ג</td><td>/dj/</td><td class="g-he">ג׳ירָפָה — jirafa</td><td>árabe/francés</td></tr>
+          <tr><td class="g-he">'ז</td><td>/zh/</td><td class="g-he">'זַ'קֶט — chaqueta</td><td>francés</td></tr>
+          <tr><td class="g-he">'צ</td><td>/ch/</td><td class="g-he">'צִיפְּס — chips</td><td>inglés</td></tr>
+        </table>
+        <div class="g-note">Estos sonidos no existen en hebreo bíblico ni en raíces semíticas originales. Si ves apóstrofe en una letra, la palabra es un préstamo — no busques raíz hebrea.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U13 -->
+  <div class="g-unit-content" id="g-u13">
+    <div class="g-section">
+      <div class="g-title">U13 · Tres verbos nuevos — mismo patrón pa'al de U6</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen presenta אוֹכֵל, קוֹרֵא y שׁוֹתֶה como verbos nuevos sin señalar que son el mismo patrón mishkal que לוֹמֵד de U6. El alumno debería reconocer el sistema, no memorizar cada verbo aislado. שׁוֹתֶה es lamed-he (raíz termina en ה) — mismo patrón de גָּר→גָּרָה de U8. קוֹרֵא es lamed-alef (raíz termina en א) — la alef se mantiene en femenino: קוֹרֵאת, a diferencia del lamed-he.</div></div>
+      <div class="g-card">
+        <div class="g-tag">patrón pa'al — 4 variantes · mismo sistema</div>
+        <table class="g-table">
+          <tr><th>Masc.sg.</th><th>Fem.sg.</th><th>Masc.pl.</th><th>Fem.pl.</th><th>Tipo raíz</th></tr>
+          <tr><td class="g-he">לוֹמֵד</td><td class="g-he">לוֹמֶדֶת</td><td class="g-he">לוֹמְדִים</td><td class="g-he">לוֹמְדוֹת</td><td>regular (U6)</td></tr>
+          <tr><td class="g-he">אוֹכֵל</td><td class="g-he">אוֹכֶלֶת</td><td class="g-he">אוֹכְלִים</td><td class="g-he">אוֹכְלוֹת</td><td>alef inicial</td></tr>
+          <tr><td class="g-he">קוֹרֵא</td><td class="g-he">קוֹרֵאת</td><td class="g-he">קוֹרְאִים</td><td class="g-he">קוֹרְאוֹת</td><td>lamed-alef</td></tr>
+          <tr><td class="g-he">שׁוֹתֶה</td><td class="g-he">שׁוֹתָה</td><td class="g-he">שׁוֹתִים</td><td class="g-he">שׁוֹתוֹת</td><td>lamed-he (U8)</td></tr>
+        </table>
+        <div class="g-info" style="font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)">
+          <strong>Conexión U8:</strong> שׁוֹתֶה→שׁוֹתָה usa el mismo patrón lamed-he que גָּר→גָּרָה. No es excepción — es el mismo sistema.<br>
+          <strong>Lamed-alef vs lamed-he:</strong> קוֹרֵאת mantiene la alef. שׁוֹתָה pierde la he y cambia vocal. Dos comportamientos distintos según la letra final de la raíz.
+        </div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U13 · Oraciones SVO — verbo + objeto directo</div>
+      <div class="g-card">
+        <div class="g-tag">sintaxis · Sujeto-Verbo-Objeto</div>
+        <div class="g-rule">El hebreo moderno sigue el mismo orden que el español: Sujeto → Verbo → Objeto. Con los verbos de U13 ya podés construir oraciones completas usando todo el vocabulario acumulado.</div>
+        <div style="font-family:'Crimson Pro',serif;direction:rtl;text-align:right;font-size:17px;color:var(--gold);line-height:2.6;margin:10px 0">
+          הוּא אוֹכֵל פָּלָאפֶל<br>
+          הִיא שׁוֹתָה קָפֶה<br>
+          הֵם קוֹרְאִים עִיתּוֹן<br>
+          אֲנַחְנוּ אוֹכְלִים סוּשִׁי<br>
+          אַתֶּם שׁוֹתִים בִּירָה
+        </div>
+        <div style="font-size:10px;color:var(--dim);line-height:2.4;margin-top:4px">
+          Él come falafel · Ella bebe café<br>
+          Ellos leen periódico · Nosotros comemos sushi<br>
+          Vosotros bebéis cerveza
+        </div>
+        <div class="g-note">Estas oraciones combinan pronombres de U12, verbos de U13 y vocabulario de U2–U7. Si podés producirlas sin ver el hebreo, U6–U13 están consolidadas.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U13 · Diálogo — Ruti y Dani en la universidad</div>
+      <div class="g-card">
+        <div class="g-tag">texto integrador U1–U13</div>
+        <div class="dialog-box">
+          <div class="dialog-line"><div class="dialog-sp">Dani</div><div><div class="dialog-he">.ינד ינא .םולש</div><div class="dialog-es">Hola. Soy Dani.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Ruti</div><div><div class="dialog-he">.יתור ינא .דואמ םיענ</div><div class="dialog-es">Mucho gusto. Soy Ruti.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Dani</div><div><div class="dialog-he">?ןתא הפיאמ</div><div class="dialog-es">¿De dónde son (vosotras)?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Ruti</div><div><div class="dialog-he">.ןודנולמ איהו הניטנגראמ ינא</div><div class="dialog-es">Yo soy de Argentina y ella es de Londres.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Dani</div><div><div class="dialog-he">?תודמול ןתא המ</div><div class="dialog-es">¿Qué estudian?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Ruti</div><div><div class="dialog-he">.הירוטסיה תודמול ונחנא</div><div class="dialog-es">Estudiamos historia.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Dani</div><div><div class="dialog-he">.תילגנא דמול ינא .דימלת ינא םג</div><div class="dialog-es">Yo también soy estudiante. Estudio inglés.</div></div></div>
+        </div>
+        <div class="g-note">Estructuras activas: pronombres U1–U12 · מ... de U3 · לוֹמֵד plural de U12 · vocabulario de idiomas U13. Si podés producirlo sin ver el hebreo, las bases están consolidadas.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U14 -->
+  <div class="g-unit-content" id="g-u14">
+    <div class="g-section">
+      <div class="g-title">U14 · עוֹשֶׂה y מְדַבֵּר — dos binyanim distintos</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen presenta עוֹשֶׂה y מְדַבֵּר como verbos nuevos sin señalar que pertenecen a grupos (binyanim) distintos. מְדַבֵּר es Pi'el — el prefijo מְ y el dagesh en la segunda letra de la raíz (בּ) son sus marcas. עוֹשֶׂה es pa'al lamed-he — mismo patrón que גָּרָה y שׁוֹתָה. La tabla de 5 grupos al final de la unidad es la introducción implícita al sistema de binyanim — el más importante del hebreo — y Rosen la trata como nota al pie.</div></div>
+      <div class="g-card">
+        <div class="g-tag">עוֹשֶׂה — pa'al lamed-he · raíz ע-ש-ה</div>
+        <table class="g-table">
+          <tr><th>Masc.sg.</th><th>Fem.sg.</th><th>Masc.pl.</th><th>Fem.pl.</th></tr>
+          <tr><td class="g-he">עוֹשֶׂה</td><td class="g-he">עוֹשָׂה</td><td class="g-he">עוֹשִׂים</td><td class="g-he">עוֹשׂוֹת</td></tr>
+          <tr><td>osé</td><td>osá</td><td>osim</td><td>osot</td></tr>
+        </table>
+        <div class="g-info" style="font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)"><strong>Conexión U8 y U13:</strong> עוֹשָׂה usa el mismo patrón lamed-he que גָּרָה y שׁוֹתָה. No es excepción — es el tercer verbo del mismo grupo que ya conocés.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-tag">מְדַבֵּר — Pi'el · raíz ד-ב-ר</div>
+        <table class="g-table">
+          <tr><th>Masc.sg.</th><th>Fem.sg.</th><th>Masc.pl.</th><th>Fem.pl.</th></tr>
+          <tr><td class="g-he">מְדַבֵּר</td><td class="g-he">מְדַבֶּרֶת</td><td class="g-he">מְדַבְּרִים</td><td class="g-he">מְדַבְּרוֹת</td></tr>
+          <tr><td>medaber</td><td>medaberet</td><td>medabrim</td><td>medabrot</td></tr>
+        </table>
+        <div class="g-warn" style="font-size:10px;color:var(--bad);line-height:1.7;margin-top:8px;padding:10px;background:rgba(201,76,76,0.06);border:1px solid rgba(201,76,76,0.2)"><strong>Marca del Pi'el:</strong> prefijo מְ + dagesh en la 2ª letra de la raíz (בּ). Cuando veas este patrón en cualquier verbo, es Pi'el. Rosen no lo dice explícitamente — pero ya lo podés reconocer.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U14 · Los 5 grupos verbales — introducción a los binyanim</div>
+      <div class="g-card">
+        <div class="g-tag">sistema verbal · mapa completo hasta U14</div>
+        <div class="g-rule">Rosen llama a estos "grupos" — en gramática hebrea se llaman בִּנְיָנִים (binyanim = construcciones). Son los patrones que determinan la conjugación y el significado de todo verbo hebreo.</div>
+        <table class="g-table">
+          <tr><th>Grupo</th><th>Ejemplo</th><th>Binyán</th><th>Característica</th></tr>
+          <tr><td>1</td><td class="g-he">לוֹמֵד</td><td>Pa'al</td><td>forma base · la más común</td></tr>
+          <tr><td>2</td><td class="g-he">שׁוֹתֶה / עוֹשֶׂה</td><td>Pa'al lamed-he</td><td>raíz termina en ה</td></tr>
+          <tr><td>3</td><td class="g-he">מְדַבֵּר</td><td>Pi'el</td><td>מְ + dagesh en 2ª letra</td></tr>
+          <tr><td>4</td><td class="g-he">גָּר</td><td>Pa'al hueco</td><td>raíz de 2 letras visibles</td></tr>
+          <tr><td>5</td><td class="g-he">מֵבִין</td><td>Hif'il</td><td>מֵ al inicio</td></tr>
+        </table>
+        <div class="g-note">Hay 7 binyanim en total en el hebreo completo. Con U14 conocés 3 de los más importantes: Pa'al, Pi'el e Hif'il. Cada uno tiene su propio patrón de conjugación y su propio campo semántico.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U14 · Verbos transitivos vs. intransitivos</div>
+      <div class="g-card">
+        <div class="g-tag">sintaxis · objeto directo vs. indirecto</div>
+        <div class="g-rule">Transitivo: el verbo necesita objeto directo. Intransitivo: el verbo no lo necesita.</div>
+        <table class="g-table">
+          <tr><th>Tipo</th><th>Ejemplo</th><th>Nota</th></tr>
+          <tr><td>Transitivo directo</td><td class="g-he">הֵם קוֹרְאִים סֵפֶר</td><td>ellos leen un libro</td></tr>
+          <tr><td>Transitivo indirecto</td><td class="g-he">הוּא חוֹשֵׁב עַל רוּתִי</td><td>él piensa en Ruti · עַל = preposición</td></tr>
+          <tr><td>Intransitivo</td><td class="g-he">הִיא קָמָה</td><td>ella se levanta · sin objeto</td></tr>
+        </table>
+        <div class="g-note">Importante: las preposiciones que acompañan cada verbo en hebreo no siempre corresponden al español. Hay que aprenderlas junto con el verbo — traducir literalmente genera errores.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U15 -->
+  <div class="g-unit-content" id="g-u15">
+    <div class="g-section">
+      <div class="g-title">U15 · 8 verbos pa'al — mismo patrón, 8 raíces</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen lista 8 verbos nuevos sin señalar que todos son pa'al y que el patrón de conjugación es idéntico al לוֹמֵד de U6. Si reconocés el patrón, no memorizás 8 verbos — memorizás 8 raíces. También omite que אוֹהֵב funciona como "gustar" del español (אֲנִי אוֹהֵב פִּיצָה = me gusta la pizza), y que רוֹצֶה y יוֹדֵעַ tienen irregularidades que ya conocés por patrón.</div></div>
+      <div class="g-card">
+        <div class="g-tag">8 verbos · pa'al · mismo patrón</div>
+        <table class="g-table">
+          <tr><th>Masc.sg.</th><th>Fem.sg.</th><th>Raíz</th><th>Tipo</th></tr>
+          <tr><td class="g-he">כּוֹתֵב</td><td class="g-he">כּוֹתֶבֶת</td><td>כ-ת-ב</td><td>regular</td></tr>
+          <tr><td class="g-he">חוֹשֵׁב</td><td class="g-he">חוֹשֶׁבֶת</td><td>ח-ש-ב</td><td>regular</td></tr>
+          <tr><td class="g-he">שׁוֹאֵל</td><td class="g-he">שׁוֹאֶלֶת</td><td>ש-א-ל</td><td>regular</td></tr>
+          <tr><td class="g-he">אוֹהֵב</td><td class="g-he">אוֹהֶבֶת</td><td>א-ה-ב</td><td>regular</td></tr>
+          <tr><td class="g-he">יוֹדֵעַ</td><td class="g-he">יוֹדַעַת</td><td>י-ד-ע</td><td>lamed-ayin</td></tr>
+          <tr><td class="g-he">רוֹצֶה</td><td class="g-he">רוֹצָה</td><td>ר-צ-ה</td><td>lamed-he</td></tr>
+        </table>
+        <div class="g-info" style="font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)">
+          <strong>Patrón que ya conocés:</strong><br>
+          יוֹדַעַת = lamed-ayin · mismo que קוֹרֵאת (U13) — letra final se mantiene<br>
+          רוֹצָה = lamed-he · mismo que שׁוֹתָה/עוֹשָׂה (U13/U14) — vocal cambia
+        </div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U15 · אוֹהֵב — "amar" y "gustar" en hebreo</div>
+      <div class="g-card">
+        <div class="g-tag">falso cognado funcional · trampa para hispanohablantes</div>
+        <div class="g-rule">En hebreo אוֹהֵב funciona para ambos: "amar" (personas) y "gustar" (cosas). No existe un verbo equivalente al "gustar" del español que invierta el sujeto.</div>
+        <table class="g-table">
+          <tr><th>Español</th><th>Hebreo</th><th>Estructura</th></tr>
+          <tr><td>Yo amo a Ruti</td><td class="g-he">אֲנִי אוֹהֵב אֶת רוּתִי</td><td>sujeto + verbo + objeto</td></tr>
+          <tr><td>Me gusta la pizza</td><td class="g-he">אֲנִי אוֹהֵב פִּיצָה</td><td>sujeto + verbo + objeto (idéntico)</td></tr>
+          <tr><td>A ella le gusta el café</td><td class="g-he">הִיא אוֹהֶבֶת קָפֶה</td><td>sujeto + verbo + objeto</td></tr>
+        </table>
+        <div class="g-warn" style="font-size:10px;color:var(--bad);line-height:1.7;margin-top:8px;padding:10px;background:rgba(201,76,76,0.06);border:1px solid rgba(201,76,76,0.2)">En español "me gusta" invierte el sujeto. En hebreo אוֹהֵב nunca se invierte — siempre es "yo amo/me gusta". No traduzcan literalmente del español.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U15 · עַל — preposición "sobre / acerca de"</div>
+      <div class="g-card">
+        <div class="g-tag">preposición independiente · no adherida</div>
+        <div class="g-rule">A diferencia de מ/ל/ב/ש que se adhieren a la siguiente palabra, עַל va separada. Tiene dos usos principales:</div>
+        <table class="g-table">
+          <tr><th>Uso</th><th>Ejemplo</th><th>Español</th></tr>
+          <tr><td>Físico (sobre)</td><td class="g-he">הַסֵּפֶר עַל הַשֻּׁלְחָן</td><td>el libro está sobre la mesa</td></tr>
+          <tr><td>Temático (acerca de)</td><td class="g-he">הוּא חוֹשֵׁב עַל רוּתִי</td><td>él piensa en/acerca de Ruti</td></tr>
+        </table>
+        <div class="g-note">חוֹשֵׁב עַל (piensa en) · מְדַבֵּר עַל (habla de) · קוֹרֵא עַל (lee sobre). Los verbos de pensamiento/comunicación en hebreo toman עַל como objeto indirecto — equivalente al "en/de/sobre" del español.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U16 -->
+  <div class="g-unit-content" id="g-u16">
+    <div class="g-section">
+      <div class="g-title">U16 · El infinitivo — forma base del verbo</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen introduce el infinitivo sin articular que la ל adherida al inicio es siempre obligatoria — no es partícula opcional. Los cambios vocálicos ante guturales los presenta como tabla a memorizar sin la regla subyacente: las guturales (א ה ח ע) fuerzan apertura vocálica y por eso el לִ cambia. El infinitivo de אָמַר (decir) → לוֹמַר (irregular) se da como excepción sin nombrarlo como tal. Esta unidad es el puente directo a la estructura רוֹצֶה + לְ + infinitivo que ya aparecía en U20.</div></div>
+      <div class="g-card">
+        <div class="g-tag">patrón · לִ adherida + raíz</div>
+        <div class="g-rule">El infinitivo hebreo se forma con ל adherida al inicio del verbo. En pa'al el patrón base es לִ + raíz. Ante guturales la vocal cambia.</div>
+        <table class="g-table">
+          <tr><th>Presente</th><th>Infinitivo</th><th>Transliteración</th><th>Nota</th></tr>
+          <tr><td class="g-he">כּוֹתֵב</td><td class="g-he">לִכְתֹּב</td><td>lijtov</td><td>regular</td></tr>
+          <tr><td class="g-he">לוֹמֵד</td><td class="g-he">לִלְמֹד</td><td>lilmod</td><td>regular</td></tr>
+          <tr><td class="g-he">אוֹכֵל</td><td class="g-he">לֶאֱכֹל</td><td>le'ejol</td><td>א gutural → לֶ</td></tr>
+          <tr><td class="g-he">חוֹשֵׁב</td><td class="g-he">לַחְשֹׁב</td><td>lajshov</td><td>ח gutural → לַ</td></tr>
+          <tr><td class="g-he">עוֹשֶׂה</td><td class="g-he">לַעֲשׂוֹת</td><td>la'asot</td><td>ע gutural → לַ</td></tr>
+          <tr><td class="g-he">שׁוֹתֶה</td><td class="g-he">לִשְׁתּוֹת</td><td>lishtot</td><td>lamed-he</td></tr>
+          <tr><td class="g-he">גָּר</td><td class="g-he">לָגוּר</td><td>lagur</td><td>raíz hueca</td></tr>
+          <tr><td class="g-he">אוֹמֵר</td><td class="g-he">לוֹמַר</td><td>lomar</td><td>irregular</td></tr>
+        </table>
+        <div class="g-info" style="font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)"><strong>Regla de guturales:</strong> א ה ח ע no toleran shvá audible — fuerzan apertura vocálica. Por eso לִ → לֶ o לַ ante guturales. El mismo principio que viste en U3 con מִ → מֵ.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U16 · Verbo conjugado + infinitivo — estructura clave</div>
+      <div class="g-card">
+        <div class="g-tag">sintaxis · conexión directa con U20</div>
+        <div class="g-rule">En hebreo el infinitivo sigue directamente al verbo conjugado. El sujeto solo se marca en el primer verbo — el infinitivo es invariable.</div>
+        <table class="g-table">
+          <tr><th>Sujeto</th><th>Verbo conjugado</th><th>Infinitivo</th><th>Objeto</th></tr>
+          <tr><td class="g-he">הוּא</td><td class="g-he">רוֹצֶה</td><td class="g-he">לֶאֱכֹל</td><td class="g-he">סָלָט</td></tr>
+          <tr><td class="g-he">הִיא</td><td class="g-he">רוֹצָה</td><td class="g-he">לִשְׁתּוֹת</td><td class="g-he">קָפֶה</td></tr>
+          <tr><td class="g-he">הֵם</td><td class="g-he">רוֹצִים</td><td class="g-he">לִלְמֹד</td><td class="g-he">עִבְרִית</td></tr>
+          <tr><td class="g-he">אֲנִי</td><td class="g-he">אוֹהֵב</td><td class="g-he">לִכְתֹּב</td><td class="g-he">בָּעִבְרִית</td></tr>
+        </table>
+        <div class="g-warn" style="font-size:10px;color:var(--bad);line-height:1.7;margin-top:8px;padding:10px;background:rgba(201,76,76,0.06);border:1px solid rgba(201,76,76,0.2)"><strong>Conexión U20:</strong> Esta es exactamente la estructura que usaba Zahava en la clase del restaurante — הוּא רוֹצֶה לֶאֱכֹל שְׁנִיצֶל. Sin dominar el infinitivo, esa estructura se cae.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U16 · Vocabulario — leche, azúcar, cantidades</div>
+      <div class="g-card">
+        <div class="g-tag">vocabulario cotidiano · diálogo Ima y Yael</div>
+        <div class="dialog-box">
+          <div class="dialog-line"><div class="dialog-sp">Ima</div><div><div class="dialog-he">?השוע תא המ ,לעי ,ולה</div><div class="dialog-es">Hola Yael, ¿qué estás haciendo?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Yael</div><div><div class="dialog-he">.תדמול</div><div class="dialog-es">Estudiando.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Ima</div><div><div class="dialog-he">?תלכוא תא</div><div class="dialog-es">¿Estás comiendo?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Yael</div><div><div class="dialog-he">.אל</div><div class="dialog-es">No.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Ima</div><div><div class="dialog-he">?תותשל הצור אל תא</div><div class="dialog-es">¿No quieres beber?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Yael</div><div><div class="dialog-he">!דומלל הצור ינא !ןיבמ אל ינא ,אמיא</div><div class="dialog-es">¡Mamá, no entiendo! ¡Quiero estudiar!</div></div></div>
+        </div>
+        <div class="g-note">El diálogo usa la estructura verbo+infinitivo en negación: תותשל הצור אל (no quiere beber) y afirmación: דומלל הצור ינא (quiero estudiar). La negación אַל con infinitivo = "no quieras" (imperativo); לֹא con conjugado = "no quiere".</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U17 -->
+  <div class="g-unit-content" id="g-u17">
+    <div class="g-section">
+      <div class="g-title">U17 · Palabras de modales — תּוֹדָה · בְּבַקָּשָׁה · סְלִיחָה</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen presenta תּוֹדָה sin señalar la trampa ortográfica: la ת inicial es correcta (raíz י-ד-ה) — el error frecuente es escribir ט. La distinción מְדַבֵּר vs אוֹמֵר se menciona brevemente sin dar la regla clara: אוֹמֵר solo introduce citas directas (discourse marker), מְדַבֵּר describe el acto de hablar.</div></div>
+      <div class="g-card">
+        <div class="g-tag">tres palabras esenciales de cortesía</div>
+        <table class="g-table">
+          <tr><th>Hebreo</th><th>Pronunciación</th><th>Uso</th><th>Raíz</th></tr>
+          <tr><td class="g-he">תּוֹדָה</td><td>todá</td><td>gracias (siempre)</td><td>י-ד-ה</td></tr>
+          <tr><td class="g-he">תּוֹדָה רַבָּה</td><td>todá rabá</td><td>muchas gracias</td><td>י-ד-ה</td></tr>
+          <tr><td class="g-he">בְּבַקָּשָׁה</td><td>bevakaShá</td><td>por favor / de nada</td><td>ב-ק-ש</td></tr>
+          <tr><td class="g-he">סְלִיחָה</td><td>slijá</td><td>perdón / disculpe / permiso</td><td>ס-ל-ח</td></tr>
+        </table>
+        <div class="g-warn" style="font-size:10px;color:var(--bad);line-height:1.7;margin-top:8px;padding:10px;background:rgba(201,76,76,0.06);border:1px solid rgba(201,76,76,0.2)"><strong>Trampa ortográfica:</strong> תּוֹדָה comienza con ת (tav) NO con ט (tet). La raíz י-ד-ה (agradecer/confesar) tiene tav. Error muy frecuente en hispanohablantes que escriben fonéticamente.</div>
+        <div class="g-note">בְּבַקָּשָׁה tiene doble uso: "por favor" al pedir, y "de nada" al responder a תּוֹדָה. El mismo contexto U20: el diálogo de restaurante usa ambas palabras.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U17 · אוֹמֵר vs מְדַבֵּר — la distinción decir/hablar</div>
+      <div class="g-card">
+        <div class="g-tag">distinción semántica · no intercambiables</div>
+        <div class="g-rule">Dos verbos para el acto verbal — Rosen los introduce en unidades separadas sin contrastarlos:</div>
+        <table class="g-table">
+          <tr><th>Verbo</th><th>Uso</th><th>Ejemplo</th></tr>
+          <tr><td class="g-he">אוֹמֵר</td><td>introduce citas directas · "dice que"</td><td class="g-he">היא אומרת "תודה"</td></tr>
+          <tr><td class="g-he">מְדַבֵּר</td><td>describe el acto de hablar · con preposición</td><td class="g-he">הוא מדבר עם דני</td></tr>
+        </table>
+        <div class="g-note">Regla práctica: si viene una cita directa después → אוֹמֵר. Si viene "con alguien" o "sobre algo" → מְדַבֵּר. Nunca se intercambian: "dice con Dani" no existe en hebreo.</div>
+        <div style="font-family:'Crimson Pro',serif;direction:rtl;text-align:right;font-size:16px;color:var(--gold);line-height:2.4;margin:10px 0">
+          ✓ הִיא אוֹמֶרֶת "בְּבַקָּשָׁה" — Ella dice "por favor"<br>
+          ✓ הוּא מְדַבֵּר עִם הַמּוֹכֶרֶת — Él habla con la vendedora<br>
+          ✗ הִיא מְדַבֶּרֶת "בְּבַקָּשָׁה" — incorrecto
+        </div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U17 · Diálogo — café con leche, por favor</div>
+      <div class="g-card">
+        <div class="g-tag">texto integrador · vocabulario de cortesía en acción</div>
+        <div class="dialog-box">
+          <div class="dialog-line"><div class="dialog-sp">Ruti</div><div><div class="dialog-he">.השקבב ,בלח םע הפק הצור ינא .םולש</div><div class="dialog-es">Hola. Quiero café con leche, por favor.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Mojerot</div><div><div class="dialog-he">?רכוס םע</div><div class="dialog-es">¿Con azúcar?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Ruti</div><div><div class="dialog-he">.ילב .אל</div><div class="dialog-es">No. Sin.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Mojerot</div><div><div class="dialog-he">?והשמ דוע הצור תא .השקבב</div><div class="dialog-es">Por favor. ¿Quieres algo más?</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Ruti</div><div><div class="dialog-he">.לוכאל הצור אל ינא .הגוע ילוא</div><div class="dialog-es">Tal vez pastel. No quiero comer.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Mojerot</div><div><div class="dialog-he">.ףסכה הניה .השקבב</div><div class="dialog-es">De nada. Aquí está el dinero.</div></div></div>
+          <div class="dialog-line"><div class="dialog-sp">Ruti</div><div><div class="dialog-he">.הדות</div><div class="dialog-es">Gracias.</div></div></div>
+        </div>
+        <div class="g-note">Este diálogo combina U16 (infinitivo לוֹכֵל, לִשְׁתּוֹת), U17 (modales, אוּלַי, עוֹד מַשֶּׁהוּ) y U20 (vocabulario de restaurante). Es el texto más parecido al diálogo que Zahava te asignó.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U18 -->
+  <div class="g-unit-content" id="g-u18">
+    <div class="g-section">
+      <div class="g-title">U18 · Números 0–12 — sistema y género</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen introduce los números femeninos como "los números para contar objetos femeninos" sin articular la regla sistémica: en hebreo los números cardinales neutros (para teléfonos, direcciones, autobuses) son idénticos a los números femeninos — incluso cuando el objeto es masculino. Este es un punto contraintuitivo que Rosen menciona pero no enfatiza. El verbo סוֹפֵר (contar) también es pa'al regular — Rosen lo introduce sin conectarlo al patrón ya conocido.</div></div>
+      <div class="g-card">
+        <div class="g-tag">números 0–12 — forma femenina/neutra</div>
+        <table class="g-table">
+          <tr><th>Número</th><th>Hebreo</th><th>Pronunciación</th></tr>
+          <tr><td>0</td><td class="g-he">אֶפֶס</td><td>efes</td></tr>
+          <tr><td>1</td><td class="g-he">אַחַת</td><td>ajat</td></tr>
+          <tr><td>2</td><td class="g-he">שְׁתַּיִם</td><td>shtayim</td></tr>
+          <tr><td>3</td><td class="g-he">שָׁלוֹשׁ</td><td>shalosh</td></tr>
+          <tr><td>4</td><td class="g-he">אַרְבַּע</td><td>arba</td></tr>
+          <tr><td>5</td><td class="g-he">חָמֵשׁ</td><td>jamesh</td></tr>
+          <tr><td>6</td><td class="g-he">שֵׁשׁ</td><td>shesh</td></tr>
+          <tr><td>7</td><td class="g-he">שֶׁבַע</td><td>sheva</td></tr>
+          <tr><td>8</td><td class="g-he">שְׁמוֹנֶה</td><td>shmone</td></tr>
+          <tr><td>9</td><td class="g-he">תֵּשַׁע</td><td>tesha</td></tr>
+          <tr><td>10</td><td class="g-he">עֶשֶׂר</td><td>eser</td></tr>
+          <tr><td>11</td><td class="g-he">אַחַת עֶשְׂרֵה</td><td>ajat esre</td></tr>
+          <tr><td>12</td><td class="g-he">שְׁתֵּים עֶשְׂרֵה</td><td>shtem esre</td></tr>
+        </table>
+        <div class="g-info" style="font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)"><strong>Regla clave:</strong> Para números de teléfono, autobús, dirección — siempre la forma femenina/neutra. "Autobús 4" = אוֹטוֹבּוּס מִסְפָּר אַרְבַּע (no arba'a).</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U18 · סוֹפֵר — verbo "contar" · pa'al regular</div>
+      <div class="g-card">
+        <div class="g-tag">pa'al · raíz ס-פ-ר · mismo patrón de U6</div>
+        <table class="g-table">
+          <tr><th>Masc.sg.</th><th>Fem.sg.</th><th>Masc.pl.</th><th>Fem.pl.</th><th>Infinitivo</th></tr>
+          <tr><td class="g-he">סוֹפֵר</td><td class="g-he">סוֹפֶרֶת</td><td class="g-he">סוֹפְרִים</td><td class="g-he">סוֹפְרוֹת</td><td class="g-he">לִסְפֹּר</td></tr>
+        </table>
+        <div class="g-note">Raíz ס-פ-ר conecta: סוֹפֵר (cuenta) · סֵפֶר (libro) · סוֹפֵר (escriba/escriba) · מִסְפָּר (número) · סְפָרַד (España). La raíz que une contar, escribir y el libro sagrado es la misma.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U18 · Vocabulario — números en uso real</div>
+      <div class="g-card">
+        <div class="g-tag">números telefónicos · direcciones · expresiones</div>
+        <div style="font-family:'Crimson Pro',serif;direction:rtl;text-align:right;font-size:16px;color:var(--gold);line-height:2.6;margin:10px 0">
+          ?הַמִּסְפָּר שֶׁלְּךָ מַה — ¿Cuál es tu número?<br>
+          .02-5634726 — cero dos, cinco seis tres cuatro siete dos seis<br>
+          .בְּרְחוֹב יָפוֹ חָמֵשׁ — En la calle Yafo cinco<br>
+          .אוֹטוֹבּוּס מִסְפַּר אַרְבַּע — Autobús número cuatro
+        </div>
+        <div class="g-note">En hebreo los números de calle y teléfono se leen dígito por dígito usando la forma neutra/femenina. No existe "doce" para una dirección — se dice "uno dos".</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- U19 -->
+  <div class="g-unit-content" id="g-u19">
+    <div class="g-section">
+      <div class="g-title">U19 · ¿Qué hora es? — הַשָּׁעָה מַה</div>
+      <div class="gap-card"><div class="gap-title">⚠ Vacío pedagógico</div><div class="gap-text">Rosen presenta las horas sin articular que el hebreo usa dos sistemas en paralelo: escrito en formato 24 horas (sin AM/PM), hablado en ciclos de 12 horas con modificadores de período (בַּבֹּקֶר, בָּעֶרֶב, בַּלַּיְלָה). Tampoco señala que la preposición ב... de U8 reaparece aquí para expresar tiempo — mismo morfema, función extendida. El verbo עוֹבֵד (trabaja) es pa'al regular — mismo patrón de U6.</div></div>
+      <div class="g-card">
+        <div class="g-tag">estructura de la hora en hebreo</div>
+        <div class="g-rule">Para preguntar: מַה הַשָּׁעָה (ma hashá'a = ¿qué la hora?). Para responder: הַשָּׁעָה + número.</div>
+        <table class="g-table">
+          <tr><th>Hora</th><th>Hebreo</th><th>Pronunciación</th></tr>
+          <tr><td>1:00</td><td class="g-he">הַשָּׁעָה אַחַת</td><td>hashá'a ajat</td></tr>
+          <tr><td>2:00</td><td class="g-he">הַשָּׁעָה שְׁתַּיִם</td><td>hashá'a shtayim</td></tr>
+          <tr><td>3:30</td><td class="g-he">הַשָּׁעָה שָׁלוֹשׁ וָחֵצִי</td><td>...shalosh vajétsi</td></tr>
+          <tr><td>4:15</td><td class="g-he">הַשָּׁעָה אַרְבַּע וָרֶבַע</td><td>...arba varéva</td></tr>
+          <tr><td>4:45</td><td class="g-he">רֶבַע לְחָמֵשׁ</td><td>réva lejamesh</td></tr>
+        </table>
+        <div class="g-info" style="font-size:10px;color:var(--blue);line-height:1.7;margin-top:8px;padding:10px;background:rgba(76,122,201,0.06);border:1px solid rgba(76,122,201,0.2)"><strong>Conexión U8:</strong> ב... de posición en espacio → ב... de posición en tiempo. בַּבֹּקֶר (por la mañana) · בָּעֶרֶב (por la tarde) · בַּלַּיְלָה (por la noche). Mismo morfema adherido.</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U19 · Partes del día y עוֹבֵד</div>
+      <div class="g-card">
+        <div class="g-tag">vocabulario temporal · verbo pa'al regular</div>
+        <table class="g-table">
+          <tr><th>Hebreo</th><th>Pronunciación</th><th>Español</th></tr>
+          <tr><td class="g-he">בֹּקֶר</td><td>boker</td><td>mañana (período)</td></tr>
+          <tr><td class="g-he">צָהֳרַיִם</td><td>tsohorayim</td><td>mediodía (siempre dual)</td></tr>
+          <tr><td class="g-he">עֶרֶב</td><td>erev</td><td>tarde / víspera</td></tr>
+          <tr><td class="g-he">לַיְלָה</td><td>layla</td><td>noche</td></tr>
+          <tr><td class="g-he">עַכְשָׁיו</td><td>ajshav</td><td>ahora</td></tr>
+          <tr><td class="g-he">מָתַי</td><td>matay</td><td>¿cuándo?</td></tr>
+          <tr><td class="g-he">עוֹבֵד/עוֹבֶדֶת</td><td>oved/ovedet</td><td>trabaja (m/f)</td></tr>
+        </table>
+        <div class="g-note">צָהֳרַיִם (mediodía) es siempre dual — igual que מַיִם (agua, U6). El hebreo tiene restos del sistema de número dual bíblico en palabras de pares naturales: צָהֳרַיִם (mediodía = dos picos del sol), שָׁמַיִם (cielos), פָּנִים (rostro).</div>
+      </div>
+    </div>
+    <div class="g-section">
+      <div class="g-title">U19 · ¿Cuándo? — מָתַי + preposición ב...</div>
+      <div class="g-card">
+        <div class="g-tag">pregunta temporal · respuesta con ב adherida</div>
+        <div style="font-family:'Crimson Pro',serif;direction:rtl;text-align:right;font-size:16px;color:var(--gold);line-height:2.6;margin:10px 0">
+          ?הָפְק הֶתוֹשׁ הַתָּא יַתָמ — ¿Cuándo bebes café?<br>
+          .רֶקֹבַּב הֶנֹמְשִּׁב — A las ocho de la mañana<br>
+          ?תֶדֶבוֹע הַתָּא יַתָמ — ¿Cuándo trabajas?<br>
+          .בֶרֶעָּב עַבְשִּׁב — A las siete de la tarde
+        </div>
+        <div class="g-note">La estructura es: מָתַי (cuándo) → respuesta con בְּ + hora + בַּבֹּקֶר/בָּעֶרֶב/בַּלַּיְלָה. La ב... de U8 ahora funciona para tiempo además de espacio.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROOTS -->
+  <div class="g-unit-content" id="g-roots">
+    <div class="g-section">
+      <div class="g-title">Raíces clave U1–U8</div>
+      <div class="roots-grid" id="rootsGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCHEDULE ===== -->
+<div id="tab-schedule" style="display:none">
+  <div style="font-size:10px;color:var(--dim);letter-spacing:1px;margin-bottom:12px;line-height:1.8">Palabras ordenadas por próxima revisión SR. Verde = vence hoy.</div>
+  <div id="schedContent"></div>
+</div>
+
+<!-- ===== WEAK ===== -->
+<div id="tab-weak" style="display:none">
+  <div style="font-size:10px;color:var(--dim);letter-spacing:1px;margin-bottom:12px;line-height:1.8">Palabras problemáticas por errores + pistas acumulados.</div>
+  <div id="weakContent"></div>
+</div>
+</div>
+
+<script>
+// ===== VOCABULARY =====
+const VOCAB=[
+  {es:"yo",he:"אני",pr:"ani",hint:"alef-nun-yod",root:"",unit:"U1"},
+  {es:"tú (masc.)",he:"אתה",pr:"atá",hint:"alef-tav-he",root:"",unit:"U1"},
+  {es:"tú (fem.)",he:"את",pr:"at",hint:"2 letras: alef-tav",root:"",unit:"U1"},
+  {es:"hola / paz",he:"שלום",pr:"shalom",hint:"shin-lamed-vav-mem sofit ם",root:"ש-ל-מ",unit:"U1"},
+  {es:"hasta luego",he:"להתראות",pr:"lehitra'ot",hint:"raíz ר-א-ה · 6 letras",root:"ר-א-ה",unit:"U1"},
+  {es:"papá",he:"אבא",pr:"aba",hint:"alef-bet-alef",root:"א-ב",unit:"U1"},
+  {es:"sí",he:"כן",pr:"ken",hint:"kaf-nun · כּ plosiva /k/",root:"",unit:"U1"},
+  {es:"no",he:"לא",pr:"lo",hint:"lamed-alef",root:"",unit:"U1"},
+  {es:"mucho gusto",he:"נעים מאוד",pr:"na'im me'od",hint:"2 palabras · ע ayin",root:"נ-ע-מ",unit:"U1"},
+  {es:"cerveza",he:"בירה",pr:"bira",hint:"bet-yod-resh-he",root:"",unit:"U1"},
+  {es:"amor",he:"אהבה",pr:"ahavá",hint:"alef-he-bet-he",root:"א-ה-ב",unit:"U2"},
+  {es:"pez",he:"דג",pr:"dag",hint:"dalet-guimel",root:"ד-ג",unit:"U2"},
+  {es:"leyenda",he:"אגדה",pr:"agadá",hint:"alef-guimel-dalet-he",root:"ה-ג-ד",unit:"U2"},
+  {es:"bueno",he:"טוב",pr:"tov",hint:"tet ט -vav-bet · ט no ת",root:"ט-ו-ב",unit:"U2"},
+  {es:"leche",he:"חלב",pr:"jalav",hint:"jet ח -lamed-bet · ח gutural",root:"ח-ל-ב",unit:"U2"},
+  {es:"él",he:"הוא",pr:"hu",hint:"he-vav-alef",root:"",unit:"U3"},
+  {es:"ella",he:"היא",pr:"hi",hint:"he-yod-alef",root:"",unit:"U3"},
+  {es:"maestro",he:"מורה",pr:"moré",hint:"mem-vav-resh-he",root:"י-ר-ה",unit:"U3"},
+  {es:"alumno",he:"תלמיד",pr:"talmid",hint:"tav-lamed-mem-yod-dalet",root:"ל-מ-ד",unit:"U3"},
+  {es:"ok / bien",he:"בסדר",pr:"beseder",hint:"bet-samej ס -dalet-resh",root:"ס-ד-ר",unit:"U3"},
+  {es:"¿cómo estás?",he:"מה נשמע",pr:"ma nishma",hint:"¿qué se escucha? · raíz ש-מ-ע",root:"ש-מ-ע",unit:"U3"},
+  {es:"mano",he:"יד",pr:"yad",hint:"yod-dalet · 2 letras",root:"י-ד",unit:"U4"},
+  {es:"hermano",he:"אח",pr:"aj",hint:"alef-jet ח gutural",root:"א-ח",unit:"U4"},
+  {es:"oro",he:"זהב",pr:"zahav",hint:"zayin-he-bet",root:"ז-ה-ב",unit:"U4"},
+  {es:"festividad",he:"חג",pr:"jag",hint:"jet ח -guimel",root:"ח-ג-ג",unit:"U4"},
+  {es:"cocinero",he:"טבח",pr:"tabaj",hint:"tet ט -bet-jet ח · ט no ת",root:"ט-ב-ח",unit:"U4"},
+  {es:"¡salud!",he:"לחיים",pr:"lejayim",hint:"lamed-jet-yod-yod-mem sofit ם",root:"ח-י-ה",unit:"U4"},
+  {es:"niño",he:"ילד",pr:"yeled",hint:"yod-lamed-dalet",root:"י-ל-ד",unit:"U5"},
+  {es:"niña",he:"ילדה",pr:"yaldá",hint:"niño + ה",root:"י-ל-ד",unit:"U5"},
+  {es:"perro",he:"כלב",pr:"kelev",hint:"kaf-lamed-bet · כּ plosiva",root:"כ-ל-ב",unit:"U5"},
+  {es:"comida",he:"אוכל",pr:"ojel",hint:"alef-vav-kaf-lamed",root:"א-כ-ל",unit:"U5"},
+  {es:"rey",he:"מלך",pr:"melej",hint:"mem-lamed-kaf sofit ך",root:"מ-ל-כ",unit:"U5"},
+  {es:"reina",he:"מלכה",pr:"malká",hint:"rey + ה",root:"מ-ל-כ",unit:"U5"},
+  {es:"dinero",he:"כסף",pr:"kesef",hint:"kaf-samej ס -pe sofit ף",root:"כ-ס-פ",unit:"U5"},
+  {es:"amigo",he:"חבר",pr:"javer",hint:"jet ח -bet-resh",root:"ח-ב-ר",unit:"U5"},
+  {es:"estudia (masc.)",he:"לומד",pr:"lomed",hint:"lamed-vav-mem-dalet",root:"ל-מ-ד",unit:"U6"},
+  {es:"estudia (fem.)",he:"לומדת",pr:"lomedet",hint:"lomed + ת",root:"ל-מ-ד",unit:"U6"},
+  {es:"estudian (m.pl.)",he:"לומדים",pr:"lomdim",hint:"lomed + ים",root:"ל-מ-ד",unit:"U6"},
+  {es:"estudian (f.pl.)",he:"לומדות",pr:"lomdot",hint:"lomed + ות",root:"ל-מ-ד",unit:"U6"},
+  {es:"mamá",he:"אמא",pr:"ima",hint:"alef-mem-alef",root:"",unit:"U6"},
+  {es:"vino",he:"יין",pr:"yayin",hint:"yod-yod-nun sofit ן",root:"",unit:"U6"},
+  {es:"mar",he:"ים",pr:"yam",hint:"yod-mem sofit ם",root:"",unit:"U6"},
+  {es:"agua",he:"מים",pr:"mayim",hint:"mem-yod-mem sofit · siempre plural",root:"מ-י-מ",unit:"U6"},
+  {es:"malo",he:"רע",pr:"ra",hint:"resh-ayin ע gutural",root:"ר-ע",unit:"U6"},
+  {es:"hebreo (idioma)",he:"עברית",pr:"ivrit",hint:"ayin ע -bet-resh-yod-tav",root:"ע-ב-ר",unit:"U6"},
+  {es:"¿qué?",he:"מה",pr:"ma",hint:"mem-he",root:"",unit:"U6"},
+  {es:"autobús",he:"אוטובוס",pr:"otobus",hint:"alef-vav-tet-vav-bet-vav-samej ס · 7 letras",root:"",unit:"U7"},
+  {es:"nariz",he:"אף",pr:"af",hint:"alef-pe sofit ף",root:"א-פ",unit:"U7"},
+  {es:"hummus",he:"חומוס",pr:"jumus",hint:"jet ח -vav-mem-vav-samej ס",root:"ח-מ-ס",unit:"U7"},
+  {es:"ensalada",he:"סלט",pr:"salat",hint:"samej ס -lamed-tet",root:"",unit:"U7"},
+  {es:"pastel",he:"עוגה",pr:"ugá",hint:"ayin ע -vav-guimel-he · ע no alef",root:"ע-ו-ג",unit:"U7"},
+  {es:"bolígrafo",he:"עט",pr:"et",hint:"ayin ע -tet · ע no alef",root:"ע-ט",unit:"U7"},
+  {es:"boca",he:"פה",pr:"pe",hint:"pe פּ -he · פּ plosiva",root:"פ-ה",unit:"U7"},
+  {es:"pimentón",he:"פלפל",pr:"pilpel",hint:"pe-lamed-pe-lamed",root:"פ-ל-פ",unit:"U7"},
+  {es:"ojo",he:"עין",pr:"ayin",hint:"ayin ע -yod-nun sofit ן · ע no alef",root:"ע-י-נ",unit:"U7"},
+  {es:"mal de ojo",he:"עין הרע",pr:"ayin hará",hint:"ojo + el + malo · 3 palabras",root:"ע-י-נ",unit:"U7"},
+  {es:"vive (masc.)",he:"גר",pr:"gar",hint:"guimel-resh · 2 letras",root:"ג-ו-ר",unit:"U8"},
+  {es:"vive (fem.)",he:"גרה",pr:"gará",hint:"guimel-resh-he · patrón lamed-he",root:"ג-ו-ר",unit:"U8"},
+  {es:"¿dónde?",he:"איפה",pr:"eifo",hint:"alef-yod-pe-he",root:"",unit:"U8"},
+  {es:"en / dentro de",he:"ב...",pr:"be",hint:"bet adherida — no va sola",root:"",unit:"U8"},
+  {es:"internet",he:"אינטרנט",pr:"internet",hint:"alef-yod-nun-tet-resh-nun-tet · 7 letras",root:"",unit:"U8"},
+  {es:"jugo",he:"מיץ",pr:"mits",hint:"mem-yod-tsadi sofit ץ",root:"מ-י-צ",unit:"U8"},
+  {es:"pizza",he:"פיצה",pr:"pitsa",hint:"pe-yod-tsadi-he · צ = ts",root:"",unit:"U8"},
+  {es:"España",he:"ספרד",pr:"sfarad",hint:"samej ס -pe-resh-dalet · raíz ס-פ-ר",root:"ס-פ-ר",unit:"U8"},
+  {es:"Inglaterra",he:"אנגליה",pr:"angliya",hint:"alef-nun-guimel-lamed-yod-he",root:"",unit:"U8"},
+  {es:"¿de dónde?",he:"מאיפה",pr:"me'eifo",hint:"מ + איפה adheridos",root:"",unit:"U8"},
+  // U9
+  {es:"hombre",he:"איש",pr:"ish",hint:"alef-yod-shin · 3 letras",root:"א-נ-ש",unit:"U9"},
+  {es:"mujer",he:"אישה",pr:"ishá",hint:"alef-yod-shin-he · isha",root:"א-נ-ש",unit:"U9"},
+  {es:"hombres",he:"אנשים",pr:"anashim",hint:"alef-nun-shin-yod-mem sofit · recupera la nun",root:"א-נ-ש",unit:"U9"},
+  {es:"mujeres",he:"נשים",pr:"nashim",hint:"nun-shin-yod-mem sofit",root:"נ-ש",unit:"U9"},
+  {es:"casa",he:"בית",pr:"bayit",hint:"bet-yod-tav · ת no ט",root:"ב-י-ת",unit:"U9"},
+  {es:"sol",he:"שמש",pr:"shemesh",hint:"shin-mem-shin · shinׁ-mem-shin",root:"ש-מ-ש",unit:"U9"},
+  {es:"Torá",he:"תורה",pr:"torá",hint:"tav-vav-resh-he · ת no ט",root:"י-ר-ה",unit:"U9"},
+  {es:"Jerusalén",he:"ירושלים",pr:"Yerushalaim",hint:"yod-resh-vav-shin-lamed-yod-mem sofit · 7 letras",root:"י-ר-ש",unit:"U9"},
+  {es:"shekel",he:"שקל",pr:"shekel",hint:"shin-kuf ק -lamed · ק siempre /k/",root:"ש-ק-ל",unit:"U9"},
+  {es:"Israel",he:"ישראל",pr:"yisra'el",hint:"yod-shin-resh-alef-lamed · 5 letras",root:"ש-ר-א",unit:"U9"},
+  {es:"estudiante (préstamo)",he:"סטודנט",pr:"student",hint:"samej-tet-vav-dalet-nun-tet · ט porque /t/ regular",root:"",unit:"U9"},
+  {es:"teatro",he:"תיאטרון",pr:"teatron",hint:"tav-yod-alef-tet-resh-vav-nun · ת porque 'th' inglés",root:"",unit:"U9"},
+  // U10
+  {es:"este (masc.)",he:"זה",pr:"ze",hint:"zayin-he · 2 letras",root:"",unit:"U10"},
+  {es:"esta (fem.)",he:"זאת",pr:"zot",hint:"zayin-alef-tav",root:"",unit:"U10"},
+  {es:"estos / estas",he:"אלה",pr:"ele",hint:"alef-lamed-he",root:"",unit:"U10"},
+  {es:"masculino",he:"זכר",pr:"zajar",hint:"zayin-kaf-resh",root:"ז-כ-ר",unit:"U10"},
+  {es:"femenino",he:"נקבה",pr:"nekevá",hint:"nun-kuf-bet-he",root:"נ-ק-ב",unit:"U10"},
+  {es:"¿qué es esto?",he:"מה זה",pr:"ma ze",hint:"ma + ze · siempre masc.",root:"",unit:"U10"},
+  {es:"¿quién es este?",he:"מי זה",pr:"mi ze",hint:"mi (persona) + ze (masc.)",root:"",unit:"U10"},
+  {es:"¿quién es esta?",he:"מי זאת",pr:"mi zot",hint:"mi (persona) + zot (fem.)",root:"",unit:"U10"},
+  {es:"¿cómo estás? (masc.)",he:"מה שלומך",pr:"ma shlomjá",hint:"ma + shalom + ְךָ sufijo tuyo masc.",root:"ש-ל-מ",unit:"U10"},
+  {es:"¿cómo estás? (fem.)",he:"מה שלומך",pr:"ma shlomej",hint:"ma + shalom + ֵךְ sufijo tuyo fem.",root:"ש-ל-מ",unit:"U10"},
+  {es:"pan",he:"לחם",pr:"lejem",hint:"lamed-jet ח -mem · ח gutural",root:"ל-ח-מ",unit:"U10"},
+  {es:"cuaderno",he:"מחברת",pr:"majberet",hint:"mem-jet ח -bet-resh-tav · raíz ח-ב-ר",root:"ח-ב-ר",unit:"U10"},
+  {es:"computadora",he:"מחשב",pr:"majshev",hint:"mem-jet ח -shin-bet · raíz ח-ש-ב",root:"ח-ש-ב",unit:"U10"},
+  {es:"libro",he:"ספר",pr:"sefer",hint:"samej ס -pe-resh · raíz ס-פ-ר",root:"ס-פ-ר",unit:"U10"},
+  {es:"silla",he:"כיסא",pr:"kise",hint:"kaf-yod-samej ס -alef",root:"",unit:"U10"},
+  {es:"mesa",he:"שולחן",pr:"shuljan",hint:"shin-vav-lamed-jet ח -nun sofit ן",root:"ש-ל-ח",unit:"U10"},
+  // U11
+  {es:"el/la/los/las",he:"ה...",pr:"ha",hint:"he adherida — no va sola",root:"",unit:"U11"},
+  {es:"aquí está",he:"הנה",pr:"hiné",hint:"he-nun-he · demostrativo",root:"",unit:"U11"},
+  {es:"de (posesión)",he:"של",pr:"shel",hint:"shin-lamed · posesión, no origen",root:"",unit:"U11"},
+  {es:"niños (pl.)",he:"ילדים",pr:"yeladim",hint:"yod-lamed-dalet-yod-mem sofit",root:"י-ל-ד",unit:"U11"},
+  {es:"niñas (pl.)",he:"ילדות",pr:"yeladot",hint:"yod-lamed-dalet-vav-tav",root:"י-ל-ד",unit:"U11"},
+  {es:"hombres (pl.)",he:"אנשים",pr:"anashim",hint:"recupera raíz א-נ-ש · alef-nun-shin-yod-mem",root:"א-נ-ש",unit:"U11"},
+  {es:"mujeres (pl.)",he:"נשים",pr:"nashim",hint:"nun-shin-yod-mem sofit · raíz א-נ-ש",root:"א-נ-ש",unit:"U11"},
+  {es:"maestros (pl.)",he:"מורים",pr:"morim",hint:"mem-vav-resh-yod-mem sofit",root:"י-ר-ה",unit:"U11"},
+  {es:"maestras (pl.)",he:"מורות",pr:"morot",hint:"mem-vav-resh-vav-tav",root:"י-ר-ה",unit:"U11"},
+  {es:"alumnos (pl.)",he:"תלמידים",pr:"talmidim",hint:"talmid + ים",root:"ל-מ-ד",unit:"U11"},
+  {es:"alumnas (pl.)",he:"תלמידות",pr:"talmidot",hint:"talmidá pierde ה + ות",root:"ל-מ-ד",unit:"U11"},
+  {es:"perros (pl.)",he:"כלבים",pr:"klavim",hint:"kaf-lamed-bet-yod-mem sofit",root:"כ-ל-ב",unit:"U11"},
+  {es:"libros (pl.)",he:"ספרים",pr:"sfarim",hint:"samej-pe-resh-yod-mem sofit",root:"ס-פ-ר",unit:"U11"},
+  {es:"banderas (pl.)",he:"דגלים",pr:"dgalim",hint:"dalet-guimel-lamed-yod-mem sofit",root:"ד-ג-ל",unit:"U11"},
+  {es:"el niño (con artículo)",he:"הילד",pr:"hayeled",hint:"ה + ילד adherido",root:"י-ל-ד",unit:"U11"},
+  {es:"el libro de Ruti",he:"הספר של רותי",pr:"hasefer shel Ruti",hint:"הַ + ספר + של + nombre",root:"ס-פ-ר",unit:"U11"},
+  // U12
+  {es:"nosotros/as",he:"אנחנו",pr:"anajnu",hint:"alef-nun-jet-nun-vav · 5 letras",root:"",unit:"U12"},
+  {es:"vosotros (m.)",he:"אתם",pr:"atem",hint:"alef-tav-mem sofit",root:"",unit:"U12"},
+  {es:"vosotras (f.)",he:"אתן",pr:"aten",hint:"alef-tav-nun sofit",root:"",unit:"U12"},
+  {es:"ellos",he:"הם",pr:"hem",hint:"he-mem sofit",root:"",unit:"U12"},
+  {es:"ellas",he:"הן",pr:"hen",hint:"he-nun sofit",root:"",unit:"U12"},
+  {es:"amigo",he:"חבר",pr:"javer",hint:"jet ח -bet-resh · raíz ח-ב-ר",root:"ח-ב-ר",unit:"U12"},
+  {es:"amiga",he:"חברה",pr:"javeráh",hint:"javer + ה",root:"ח-ב-ר",unit:"U12"},
+  {es:"amigos",he:"חברים",pr:"javerim",hint:"javer + ים",root:"ח-ב-ר",unit:"U12"},
+  {es:"amigas",he:"חברות",pr:"javerot",hint:"javeráh pierde ה + ות",root:"ח-ב-ר",unit:"U12"},
+  {es:"viven (m.pl.)",he:"גרים",pr:"garim",hint:"gar + ים · mismo sufijo que plural sustantivos",root:"ג-ו-ר",unit:"U12"},
+  {es:"viven (f.pl.)",he:"גרות",pr:"garot",hint:"gará pierde ה + ות",root:"ג-ו-ר",unit:"U12"},
+  {es:"estudian (m.pl.)",he:"לומדים",pr:"lomdim",hint:"lomed + ים · sufijo de plural",root:"ל-מ-ד",unit:"U12"},
+  {es:"estudian (f.pl.)",he:"לומדות",pr:"lomdot",hint:"lomedet pierde ת + ות",root:"ל-מ-ד",unit:"U12"},
+  {es:"nosotros vivimos en Israel",he:"אנחנו גרים בישראל",pr:"anajnu garim beYisra'el",hint:"pronombre pl. + verbo pl. + ב + nombre",root:"ג-ו-ר",unit:"U12"},
+  // U13
+  {es:"come (masc.)",he:"אוכל",pr:"ojel",hint:"alef-vav-kaf-lamed · patrón pa'al",root:"א-כ-ל",unit:"U13"},
+  {es:"come (fem.)",he:"אוכלת",pr:"ojelet",hint:"ojel + ת",root:"א-כ-ל",unit:"U13"},
+  {es:"comen (m.pl.)",he:"אוכלים",pr:"ojlim",hint:"ojel + ים · mismo sufijo plural",root:"א-כ-ל",unit:"U13"},
+  {es:"comen (f.pl.)",he:"אוכלות",pr:"ojlot",hint:"ojel + ות",root:"א-כ-ל",unit:"U13"},
+  {es:"lee (masc.)",he:"קורא",pr:"koré",hint:"kuf-vav-resh-alef · lamed-alef",root:"ק-ר-א",unit:"U13"},
+  {es:"lee (fem.)",he:"קוראת",pr:"koret",hint:"koré + ת · la alef se mantiene",root:"ק-ר-א",unit:"U13"},
+  {es:"leen (m.pl.)",he:"קוראים",pr:"kor'im",hint:"kuf-vav-resh-alef-yod-mem sofit",root:"ק-ר-א",unit:"U13"},
+  {es:"leen (f.pl.)",he:"קוראות",pr:"kor'ot",hint:"kuf-vav-resh-alef-vav-tav",root:"ק-ר-א",unit:"U13"},
+  {es:"bebe (masc.)",he:"שותה",pr:"shoté",hint:"shin-vav-tav-he · lamed-he",root:"ש-ת-ה",unit:"U13"},
+  {es:"bebe (fem.)",he:"שותה",pr:"shotá",hint:"igual forma que masc. · vocal cambia · patrón lamed-he",root:"ש-ת-ה",unit:"U13"},
+  {es:"beben (m.pl.)",he:"שותים",pr:"shotim",hint:"shin-vav-tav-yod-mem sofit",root:"ש-ת-ה",unit:"U13"},
+  {es:"beben (f.pl.)",he:"שותות",pr:"shotot",hint:"shin-vav-tav-vav-tav",root:"ש-ת-ה",unit:"U13"},
+  {es:"periódico",he:"עיתון",pr:"iton",hint:"ayin ע -yod-tav-vav-nun sofit ן",root:"ע-ת-נ",unit:"U13"},
+  {es:"falafel",he:"פלאפל",pr:"falafel",hint:"pe-lamed-alef-pe-lamed",root:"",unit:"U13"},
+  {es:"sándwich",he:"סנדוויץ'",pr:"sandvitch",hint:"samej-nun-dalet-vav-vav-yod-tsadi · apóstrofe = préstamo",root:"",unit:"U13"},
+  {es:"historia (materia)",he:"היסטוריה",pr:"historya",hint:"he-yod-samej-tet-vav-resh-yod-he · 8 letras",root:"",unit:"U13"},
+  {es:"inglés (idioma)",he:"אנגלית",pr:"anglit",hint:"alef-nun-guimel-lamed-yod-tav",root:"",unit:"U13"},
+  {es:"email / correo",he:"אימייל",pr:"email",hint:"alef-yod-mem-yod-yod-lamed · préstamo",root:"",unit:"U13"},
+  {es:"él come falafel",he:"הוא אוכל פלאפל",pr:"hu ojel falafel",hint:"SVO · pronombre + verbo masc.sg. + objeto",root:"א-כ-ל",unit:"U13"},
+  {es:"ellas beben café",he:"הן שותות קפה",pr:"hen shotot kafé",hint:"הן + verbo f.pl. + objeto",root:"ש-ת-ה",unit:"U13"},
+  // U14
+  {es:"hace (masc.)",he:"עושה",pr:"osé",hint:"ayin-vav-shin-he · lamed-he · raíz ע-ש-ה",root:"ע-ש-ה",unit:"U14"},
+  {es:"hace (fem.)",he:"עושה",pr:"osá",hint:"igual forma · vocal cambia · patrón lamed-he",root:"ע-ש-ה",unit:"U14"},
+  {es:"hacen (m.pl.)",he:"עושים",pr:"osim",hint:"ayin-vav-shin-yod-mem sofit",root:"ע-ש-ה",unit:"U14"},
+  {es:"hacen (f.pl.)",he:"עושות",pr:"osot",hint:"ayin-vav-shin-vav-tav",root:"ע-ש-ה",unit:"U14"},
+  {es:"habla (masc.)",he:"מדבר",pr:"medaber",hint:"mem-dalet-bet-resh · מְ + dagesh en bet = Pi'el",root:"ד-ב-ר",unit:"U14"},
+  {es:"habla (fem.)",he:"מדברת",pr:"medaberet",hint:"medaber + ת · 6 letras",root:"ד-ב-ר",unit:"U14"},
+  {es:"hablan (m.pl.)",he:"מדברים",pr:"medabrim",hint:"mem-dalet-bet-resh-yod-mem sofit",root:"ד-ב-ר",unit:"U14"},
+  {es:"hablan (f.pl.)",he:"מדברות",pr:"medabrot",hint:"mem-dalet-bet-resh-vav-tav",root:"ד-ב-ר",unit:"U14"},
+  {es:"entiende (masc.)",he:"מבין",pr:"mevin",hint:"mem-bet-yod-nun sofit · Hif'il · מֵ al inicio",root:"ב-י-נ",unit:"U14"},
+  {es:"entiende (fem.)",he:"מבינה",pr:"meviná",hint:"mem-bet-yod-nun-he",root:"ב-י-נ",unit:"U14"},
+  {es:"entienden (m.pl.)",he:"מבינים",pr:"mevinim",hint:"mem-bet-yod-nun-yod-mem sofit",root:"ב-י-נ",unit:"U14"},
+  {es:"con",he:"עם",pr:"im",hint:"ayin ע -mem sofit · preposición independiente",root:"",unit:"U14"},
+  {es:"solo / solamente",he:"רק",pr:"rak",hint:"resh-kuf ק · adverbio",root:"",unit:"U14"},
+  {es:"té",he:"תה",pr:"te",hint:"tav-he · 2 letras · ת no ט",root:"",unit:"U14"},
+  {es:"chocolate",he:"שוקולד",pr:"shokolad",hint:"shin-vav-kuf-vav-lamed-dalet",root:"",unit:"U14"},
+  {es:"ella habla hebreo",he:"היא מדברת עברית",pr:"hi medaberet ivrit",hint:"pronombre + Pi'el fem. + objeto directo",root:"ד-ב-ר",unit:"U14"},
+  {es:"él hace dinero",he:"הוא עושה כסף",pr:"hu osé kesef",hint:"pronombre + lamed-he masc. + objeto",root:"ע-ש-ה",unit:"U14"},
+  // U15
+  {es:"escribe (masc.)",he:"כותב",pr:"kotev",hint:"kaf-vav-tav-bet · pa'al regular · raíz כ-ת-ב",root:"כ-ת-ב",unit:"U15"},
+  {es:"escribe (fem.)",he:"כותבת",pr:"kotevet",hint:"kotev + ת",root:"כ-ת-ב",unit:"U15"},
+  {es:"escriben (m.pl.)",he:"כותבים",pr:"kotvim",hint:"kotev + ים",root:"כ-ת-ב",unit:"U15"},
+  {es:"piensa (masc.)",he:"חושב",pr:"joshev",hint:"jet ח -vav-shin-bet · pa'al regular",root:"ח-ש-ב",unit:"U15"},
+  {es:"piensa (fem.)",he:"חושבת",pr:"joshevet",hint:"joshev + ת",root:"ח-ש-ב",unit:"U15"},
+  {es:"sabe (masc.)",he:"יודע",pr:"yodea",hint:"yod-vav-dalet-ayin ע · lamed-ayin",root:"י-ד-ע",unit:"U15"},
+  {es:"sabe (fem.)",he:"יודעת",pr:"yodaat",hint:"yodea + ת · ayin ע se mantiene",root:"י-ד-ע",unit:"U15"},
+  {es:"ama / le gusta (masc.)",he:"אוהב",pr:"ohev",hint:"alef-vav-he-bet · mismo uso que gustar en español",root:"א-ה-ב",unit:"U15"},
+  {es:"ama / le gusta (fem.)",he:"אוהבת",pr:"ohevet",hint:"ohev + ת",root:"א-ה-ב",unit:"U15"},
+  {es:"pregunta (masc.)",he:"שואל",pr:"shoel",hint:"shin-vav-alef-lamed · pa'al",root:"ש-א-ל",unit:"U15"},
+  {es:"pregunta (fem.)",he:"שואלת",pr:"shoelet",hint:"shoel + ת",root:"ש-א-ל",unit:"U15"},
+  {es:"quiere (masc.)",he:"רוצה",pr:"rotse",hint:"resh-vav-tsadi-he · lamed-he",root:"ר-צ-ה",unit:"U15"},
+  {es:"quiere (fem.)",he:"רוצה",pr:"rotsá",hint:"igual forma · vocal cambia · patrón lamed-he",root:"ר-צ-ה",unit:"U15"},
+  {es:"quieren (m.pl.)",he:"רוצים",pr:"rotsim",hint:"resh-vav-tsadi-yod-mem sofit",root:"ר-צ-ה",unit:"U15"},
+  {es:"sobre / acerca de",he:"על",pr:"al",hint:"ayin ע -lamed · va separada, no adherida",root:"",unit:"U15"},
+  {es:"coche / carro",he:"מכונית",pr:"mejonit",hint:"mem-kaf-vav-nun-yod-tav · 6 letras",root:"כ-ו-נ",unit:"U15"},
+  {es:"pan árabe / pita",he:"פיתה",pr:"pita",hint:"pe-yod-tav-he · פּ plosiva",root:"",unit:"U15"},
+  {es:"me gusta la pizza",he:"אני אוהב פיצה",pr:"ani ohev pitsa",hint:"sujeto + אוהב + objeto directo · no se invierte",root:"א-ה-ב",unit:"U15"},
+  {es:"él piensa en Ruti",he:"הוא חושב על רותי",pr:"hu joshev al Ruti",hint:"sujeto + verbo + על + objeto indirecto",root:"ח-ש-ב",unit:"U15"},
+  {es:"ella quiere estudiar hebreo",he:"היא רוצה ללמוד עברית",pr:"hi rotsá lilmod ivrit",hint:"sujeto + quiere (f.) + infinitivo + objeto",root:"ר-צ-ה",unit:"U15"},
+  // U16
+  {es:"comer (infinitivo)",he:"לאכול",pr:"le'ejol",hint:"lamed-alef-kaf-vav-lamed · א gutural → לֶ",root:"א-כ-ל",unit:"U16"},
+  {es:"estudiar (infinitivo)",he:"ללמוד",pr:"lilmod",hint:"lamed-lamed-mem-vav-dalet · regular",root:"ל-מ-ד",unit:"U16"},
+  {es:"beber (infinitivo)",he:"לשתות",pr:"lishtot",hint:"lamed-shin-tav-vav-tav · lamed-he",root:"ש-ת-ה",unit:"U16"},
+  {es:"escribir (infinitivo)",he:"לכתוב",pr:"lijtov",hint:"lamed-kaf-tav-vav-bet · regular",root:"כ-ת-ב",unit:"U16"},
+  {es:"pensar (infinitivo)",he:"לחשוב",pr:"lajshov",hint:"lamed-jet-shin-vav-bet · ח gutural → לַ",root:"ח-ש-ב",unit:"U16"},
+  {es:"hacer (infinitivo)",he:"לעשות",pr:"la'asot",hint:"lamed-ayin-shin-vav-tav · ע gutural → לַ",root:"ע-ש-ה",unit:"U16"},
+  {es:"hablar (infinitivo)",he:"לדבר",pr:"ledaber",hint:"lamed-dalet-bet-resh · Pi'el infinitivo",root:"ד-ב-ר",unit:"U16"},
+  {es:"vivir (infinitivo)",he:"לגור",pr:"lagur",hint:"lamed-guimel-vav-resh · raíz hueca",root:"ג-ו-ר",unit:"U16"},
+  {es:"decir (infinitivo)",he:"לומר",pr:"lomar",hint:"lamed-vav-mem-resh · IRREGULAR",root:"א-מ-ר",unit:"U16"},
+  {es:"leche",he:"חלב",pr:"jalav",hint:"jet ח -lamed-bet · ח gutural",root:"ח-ל-ב",unit:"U16"},
+  {es:"azúcar",he:"סוכר",pr:"sukar",hint:"samej-vav-kaf-resh",root:"",unit:"U16"},
+  {es:"un poco",he:"קצת",pr:"ktsat",hint:"kuf-tsadi-tav · adverbio",root:"",unit:"U16"},
+  {es:"sin",he:"בלי",pr:"bli",hint:"bet-lamed-yod · preposición",root:"",unit:"U16"},
+  {es:"mucho / muchos",he:"הרבה",pr:"harbe",hint:"he-resh-bet-he · adverbio cantidad",root:"ר-ב-ה",unit:"U16"},
+  {es:"él quiere comer ensalada",he:"הוא רוצה לאכול סלט",pr:"hu rotse le'ejol salat",hint:"sujeto + verbo conjugado + infinitivo + objeto",root:"א-כ-ל",unit:"U16"},
+  {es:"quiero beber café sin azúcar",he:"אני רוצה לשתות קפה בלי סוכר",pr:"ani rotse lishtot kafé bli sukar",hint:"estructura U16 · verbo+infinitivo+objeto+modificador",root:"ש-ת-ה",unit:"U16"},
+  {es:"no quiero comer mucho",he:"אני לא רוצה לאכול הרבה",pr:"ani lo rotse le'ejol harbe",hint:"negación לֹא + verbo conjugado + infinitivo",root:"א-כ-ל",unit:"U16"},
+  // U17
+  {es:"gracias",he:"תודה",pr:"todá",hint:"tav ת -vav-dalet-he · ת NO ט",root:"י-ד-ה",unit:"U17"},
+  {es:"muchas gracias",he:"תודה רבה",pr:"todá rabá",hint:"tav ת -vav-dalet-he + resh-bet-he",root:"י-ד-ה",unit:"U17"},
+  {es:"por favor / de nada",he:"בבקשה",pr:"bevakaShá",hint:"bet-bet-kuf-shin-he · doble uso",root:"ב-ק-ש",unit:"U17"},
+  {es:"perdón / disculpe",he:"סליחה",pr:"slijá",hint:"samej-lamed-yod-jet-he · ח gutural",root:"ס-ל-ח",unit:"U17"},
+  {es:"dice (masc.)",he:"אומר",pr:"omer",hint:"alef-vav-mem-resh · introduce citas directas",root:"א-מ-ר",unit:"U17"},
+  {es:"dice (fem.)",he:"אומרת",pr:"omeret",hint:"omer + ת",root:"א-מ-ר",unit:"U17"},
+  {es:"dicen (m.pl.)",he:"אומרים",pr:"omrim",hint:"alef-vav-mem-resh-yod-mem sofit",root:"א-מ-ר",unit:"U17"},
+  {es:"tal vez",he:"אולי",pr:"ulay",hint:"alef-vav-lamed-yod",root:"",unit:"U17"},
+  {es:"un momento",he:"רק רגע",pr:"rak rega",hint:"resh-kuf + resh-guimel-ayin ע",root:"",unit:"U17"},
+  {es:"algo más",he:"עוד משהו",pr:"od mashehu",hint:"ayin ע -vav-dalet + mem-shin-he-vav",root:"",unit:"U17"},
+  {es:"vendedor",he:"מוכר",pr:"mojer",hint:"mem-vav-kaf-resh",root:"מ-כ-ר",unit:"U17"},
+  {es:"vendedora",he:"מוכרת",pr:"mojeret",hint:"mojer + ת",root:"מ-כ-ר",unit:"U17"},
+  {es:"ella dice gracias",he:"היא אומרת תודה",pr:"hi omeret todá",hint:"אומרת introduce cita directa",root:"א-מ-ר",unit:"U17"},
+  {es:"tal vez quiero pastel",he:"אולי אני רוצה עוגה",pr:"ulay ani rotse ugá",hint:"אולי + sujeto + verbo + objeto",root:"",unit:"U17"},
+  {es:"café con leche por favor",he:"קפה עם חלב בבקשה",pr:"kafé im jalav bevakaShá",hint:"objeto + עם + modificador + בבקשה",root:"",unit:"U17"},
+  // U18
+  {es:"cero",he:"אפס",pr:"efes",hint:"alef-pe-samej",root:"",unit:"U18"},
+  {es:"uno / una",he:"אחת",pr:"ajat",hint:"alef-jet-tav · forma femenina/neutra",root:"א-ח-ד",unit:"U18"},
+  {es:"dos",he:"שתיים",pr:"shtayim",hint:"shin-tav-yod-yod-mem sofit · siempre plural",root:"ש-נ-י",unit:"U18"},
+  {es:"tres",he:"שלוש",pr:"shalosh",hint:"shin-lamed-vav-shin",root:"ש-ל-ש",unit:"U18"},
+  {es:"cuatro",he:"ארבע",pr:"arba",hint:"alef-resh-bet-ayin ע · ע al final",root:"א-ר-ב",unit:"U18"},
+  {es:"cinco",he:"חמש",pr:"jamesh",hint:"jet ח -mem-shin · ח gutural",root:"ח-מ-ש",unit:"U18"},
+  {es:"seis",he:"שש",pr:"shesh",hint:"shin-shin · misma letra x2",root:"ש-ש",unit:"U18"},
+  {es:"siete",he:"שבע",pr:"sheva",hint:"shin-bet-ayin ע · ע al final",root:"ש-ב-ע",unit:"U18"},
+  {es:"ocho",he:"שמונה",pr:"shmone",hint:"shin-mem-vav-nun-he",root:"ש-מ-נ",unit:"U18"},
+  {es:"nueve",he:"תשע",pr:"tesha",hint:"tav-shin-ayin ע · ת no ט",root:"ת-ש-ע",unit:"U18"},
+  {es:"diez",he:"עשר",pr:"eser",hint:"ayin ע -shin-resh · ע al inicio",root:"ע-ש-ר",unit:"U18"},
+  {es:"once",he:"אחת עשרה",pr:"ajat esre",hint:"uno + diez · 2 palabras",root:"",unit:"U18"},
+  {es:"doce",he:"שתים עשרה",pr:"shtem esre",hint:"dos + diez · 2 palabras",root:"",unit:"U18"},
+  {es:"número",he:"מספר",pr:"mispar",hint:"mem-samej-pe-resh · raíz ס-פ-ר",root:"ס-פ-ר",unit:"U18"},
+  {es:"calle",he:"רחוב",pr:"rejov",hint:"resh-jet ח -vav-bet · ח gutural",root:"ר-ח-ב",unit:"U18"},
+  {es:"cuenta / cuenta (verbo m.)",he:"סופר",pr:"sofer",hint:"samej-vav-pe-resh · pa'al regular",root:"ס-פ-ר",unit:"U18"},
+  {es:"¿cuál es tu número?",he:"מה המספר שלך",pr:"ma hamispar shelJá",hint:"מה + הַ + מספר + של + sufijo ְךָ",root:"ס-פ-ר",unit:"U18"},
+  // U19
+  {es:"¿qué hora es?",he:"מה השעה",pr:"ma hashá'a",hint:"מה + הַ + שָׁעָה",root:"ש-ע-ה",unit:"U19"},
+  {es:"¿cuándo?",he:"מתי",pr:"matay",hint:"mem-tav-yod",root:"",unit:"U19"},
+  {es:"ahora",he:"עכשיו",pr:"ajshav",hint:"ayin ע -kaf-shin-yod-vav",root:"",unit:"U19"},
+  {es:"mañana (período)",he:"בוקר",pr:"boker",hint:"bet-vav-kuf-resh",root:"ב-ק-ר",unit:"U19"},
+  {es:"mediodía",he:"צהריים",pr:"tsohorayim",hint:"tsadi-he-resh-yod-yod-mem sofit · siempre dual",root:"צ-ה-ר",unit:"U19"},
+  {es:"tarde / víspera",he:"ערב",pr:"erev",hint:"ayin ע -resh-bet · también víspera de fiestas",root:"ע-ר-ב",unit:"U19"},
+  {es:"noche",he:"לילה",pr:"layla",hint:"lamed-yod-lamed-he",root:"ל-י-ל",unit:"U19"},
+  {es:"hora / reloj",he:"שעה",pr:"shá'a",hint:"shin-ayin ע -he · ע gutural",root:"ש-ע-ה",unit:"U19"},
+  {es:"media hora",he:"חצי",pr:"jétsi",hint:"jet ח -tsadi-yod · también 'mitad'",root:"ח-צ-י",unit:"U19"},
+  {es:"cuarto de hora",he:"רבע",pr:"réva",hint:"resh-bet-ayin ע",root:"ר-ב-ע",unit:"U19"},
+  {es:"trabaja (masc.)",he:"עובד",pr:"oved",hint:"ayin ע -vav-bet-dalet · pa'al regular",root:"ע-ב-ד",unit:"U19"},
+  {es:"trabaja (fem.)",he:"עובדת",pr:"ovedet",hint:"oved + ת",root:"ע-ב-ד",unit:"U19"},
+  {es:"trabajan (m.pl.)",he:"עובדים",pr:"ovdim",hint:"ayin ע -vav-bet-dalet-yod-mem sofit",root:"ע-ב-ד",unit:"U19"},
+  {es:"trabajo (sustantivo)",he:"עבודה",pr:"avodá",hint:"ayin ע -bet-vav-dalet-he",root:"ע-ב-ד",unit:"U19"},
+  {es:"jubilación",he:"פנסיה",pr:"pensia",hint:"pe-nun-samej-yod-he · préstamo",root:"",unit:"U19"},
+  {es:"son las ocho",he:"השעה שמונה",pr:"hashá'a shmone",hint:"הַ + שָׁעָה + número",root:"ש-ע-ה",unit:"U19"},
+  {es:"a las ocho de la mañana",he:"בשמונה בבוקר",pr:"bishmone baboker",hint:"ב + número + ב + בֹּקֶר",root:"",unit:"U19"},
+  {es:"¿cuándo trabajas?",he:"מתי אתה עובד",pr:"matay atá oved",hint:"מתי + pronombre + verbo",root:"ע-ב-ד",unit:"U19"},
+  // U20
+  {es:"hay",he:"יש",pr:"yesh",hint:"yod-shin · invariable, no se conjuga",root:"",unit:"U20"},
+  {es:"no hay",he:"אין",pr:"ein",hint:"alef-yod-nun · invariable",root:"",unit:"U20"},
+  {es:"pero",he:"אבל",pr:"aval",hint:"alef-bet-lamed",root:"",unit:"U20"},
+  {es:"entonces",he:"אז",pr:"az",hint:"alef-zayin · 2 letras",root:"",unit:"U20"},
+  {es:"grande (masc.)",he:"גדול",pr:"gadol",hint:"guimel-dalet-vav-lamed",root:"ג-ד-ל",unit:"U20"},
+  {es:"grande (fem.)",he:"גדולה",pr:"gdolá",hint:"guimel-dalet-vav-lamed-he",root:"ג-ד-ל",unit:"U20"},
+  {es:"pequeño (masc.)",he:"קטן",pr:"katan",hint:"kuf-tet-nun sofit",root:"ק-ט-נ",unit:"U20"},
+  {es:"pequeña (fem.)",he:"קטנה",pr:"ktaná",hint:"kuf-tet-nun-he",root:"ק-ט-נ",unit:"U20"},
+  {es:"buena (fem.)",he:"טובה",pr:"tová",hint:"tet-vav-bet-he · ט no ת",root:"ט-ו-ב",unit:"U20"},
+  {es:"mesero",he:"מלצר",pr:"meltsar",hint:"mem-lamed-tsadi-resh",root:"",unit:"U20"},
+  {es:"mesera",he:"מלצרית",pr:"meltsarit",hint:"mem-lamed-tsadi-resh-yod-tav",root:"",unit:"U20"},
+  {es:"restaurante",he:"מסעדה",pr:"mis'adá",hint:"mem-samej-ayin ע -dalet-he · raíz מ-ס-ע-ד",root:"מ-ס-ע-ד",unit:"U20"},
+  {es:"milanesa",he:"שניצל",pr:"shnitsel",hint:"shin-nun-yod-tsadi-lamed",root:"",unit:"U20"},
+  {es:"pasta",he:"פסטה",pr:"pasta",hint:"pe-samej-tet-he · פּ plosiva",root:"",unit:"U20"},
+  {es:"lo siento (masc.)",he:"מצטער",pr:"mitsta'er",hint:"mem-tsadi-tet-ayin ע -resh",root:"צ-ע-ר",unit:"U20"},
+  {es:"lo siento (fem.)",he:"מצטערת",pr:"mitsta'eret",hint:"mitsta'er + ת al final",root:"צ-ע-ר",unit:"U20"},
+  {es:"ul'pan (escuela intensiva)",he:"אולפן",pr:"ulpan",hint:"alef-vav-lamed-pe-nun sofit ן",root:"א-ל-פ",unit:"U20"},
+  {es:"hay café y hay torta",he:"יש קפה ויש עוגה",pr:"yesh kafé ve-yesh ugá",hint:"yesh + sustantivo · ו conjunción adherida",root:"",unit:"U20"},
+  {es:"no hay vino pero hay agua",he:"אין יין אבל יש מים",pr:"ein yayin aval yesh mayim",hint:"estructura del diálogo de U20",root:"",unit:"U20"},
+];
+
+const ROOTS=[
+  {letters:"ש-ל-מ",tr:"SH-L-M",meaning:"completitud, paz",unit:"U1",
+    family:[{he:"שלום",sp:"paz"},{he:"שלם",sp:"completo"},{he:"ירושלים",sp:"Jerusalén"}],
+    note:"Raíz estructural. שָׁלוֹם = paz, pero también integridad total."},
+  {letters:"א-ה-ב",tr:"A-H-B",meaning:"amar",unit:"U2",
+    family:[{he:"אהבה",sp:"amor"},{he:"אוהב",sp:"ama"},{he:"אהוב",sp:"amado"}],
+    note:"Gematría 13 = אחד (uno). El amor verdadero lleva a la unidad."},
+  {letters:"ה-ג-ד",tr:"H-G-D",meaning:"contar, narrar",unit:"U2",
+    family:[{he:"הגדה",sp:"Hagadá"},{he:"אגדה",sp:"leyenda"},{he:"להגיד",sp:"decir"}],
+    note:"La Hagadá de Pésaj = 'la narración'. Contar y declarar comparten raíz."},
+  {letters:"ל-מ-ד",tr:"L-M-D",meaning:"aprender / enseñar",unit:"U3",
+    family:[{he:"תלמיד",sp:"alumno"},{he:"לומד",sp:"estudia"},{he:"למד",sp:"estudió"},{he:"תלמוד",sp:"Talmud"}],
+    note:"Raíz que une alumno, maestro, verbo y el texto sagrado más importante del judaísmo."},
+  {letters:"ש-מ-ע",tr:"SH-M-A",meaning:"escuchar",unit:"U3",
+    family:[{he:"מה נשמע",sp:"¿cómo estás?"},{he:"שמע",sp:"escuchó"},{he:"שמע ישראל",sp:"Shemá Israel"}],
+    note:"La oración central del judaísmo. 'Escucha, Israel' — la misma raíz del saludo cotidiano."},
+  {letters:"י-ד",tr:"Y-D",meaning:"mano, conocer",unit:"U4",
+    family:[{he:"יד",sp:"mano"},{he:"ידע",sp:"supo"},{he:"תודה",sp:"gracias"},{he:"יהודה",sp:"Judá"}],
+    note:"La mano y el conocimiento comparten raíz. תּוֹדָה (gracias) viene de י-ד-ה: reconocer."},
+  {letters:"מ-ל-כ",tr:"M-L-J",meaning:"reinar, realeza",unit:"U5",
+    family:[{he:"מלך",sp:"rey"},{he:"מלכה",sp:"reina"},{he:"ממלכה",sp:"reino"},{he:"מלכות",sp:"Maljut"}],
+    note:"מַלְכוּת = décima sefirot en Cabalá. La realeza divina que se manifiesta en el mundo material."},
+  {letters:"כ-ת-ב",tr:"K-T-V",meaning:"escribir",unit:"U5",
+    family:[{he:"כתב",sp:"escribió"},{he:"כותב",sp:"escribe"},{he:"לכתוב",sp:"escribir"},{he:"כתובה",sp:"Ketubá"}],
+    note:"כְּתוּבָה (Ketubá) = contrato matrimonial judío — literalmente 'lo escrito'."},
+  {letters:"מ-י-מ",tr:"M-Y-M",meaning:"agua",unit:"U6",
+    family:[{he:"מים",sp:"agua (siempre pl.)"},{he:"שמים",sp:"cielos"},{he:"מרים",sp:"Miriam"}],
+    note:"מַיִם no tiene singular. En Génesis: 'el espíritu de Dios se movía sobre las aguas.'"},
+  {letters:"ע-ב-ר",tr:"A-V-R",meaning:"pasar, cruzar, hebreo",unit:"U6",
+    family:[{he:"עברית",sp:"hebreo"},{he:"עברי",sp:"hebreo (adj.)"},{he:"עבר",sp:"pasado"},{he:"לעבור",sp:"pasar/cruzar"}],
+    note:"עִבְרִי = 'el que cruzó [el río]'. El nombre 'hebreo' viene de esta raíz — los que cruzaron el Éufrates con Abraham."},
+  {letters:"ע-י-נ",tr:"A-Y-N",meaning:"ojo, fuente",unit:"U7",
+    family:[{he:"עין",sp:"ojo / letra ע"},{he:"מעיין",sp:"manantial"},{he:"עין הרע",sp:"mal de ojo"}],
+    note:"La forma de la letra ע en hebreo antiguo representaba un ojo. Letra y palabra son la misma raíz."},
+  {letters:"ס-פ-ר",tr:"S-P-R",meaning:"libro, contar, escriba",unit:"U8",
+    family:[{he:"ספרד",sp:"España"},{he:"ספר",sp:"libro"},{he:"סופר",sp:"escritor/escriba"},{he:"מספר",sp:"número"},{he:"סיפור",sp:"historia"}],
+    note:"España se llama ספרד — 'tierra de los libros/escribas' en la tradición judía sefaradí. La misma raíz une el exilio con la escritura."},
+  {letters:"א-נ-ש",tr:"A-N-SH",meaning:"humanidad, hombre/mujer",unit:"U9",
+    family:[{he:"איש",sp:"hombre"},{he:"אישה",sp:"mujer"},{he:"אנשים",sp:"hombres"},{he:"נשים",sp:"mujeres"},{he:"אנושי",sp:"humano"}],
+    note:"En Génesis 2:23: 'Esta será llamada אִשָּׁה porque del אִישׁ fue tomada.' El hebreo codifica la relación entre hombre y mujer en la raíz misma. El plural אֲנָשִׁים recupera la nun que el singular perdió."},
+  {letters:"ח-ש-ב",tr:"J-SH-V",meaning:"pensar, calcular",unit:"U10",
+    family:[{he:"מחשב",sp:"computadora"},{he:"חשב",sp:"pensó/calculó"},{he:"מחשבה",sp:"pensamiento"},{he:"חשבון",sp:"cuenta/factura"}],
+    note:"Los israelíes llamaron a la computadora 'la máquina de pensar' — no adoptaron el préstamo inglés. Hebreo moderno creando con raíces antiguas."},
+  {letters:"ח-ב-ר",tr:"J-V-R",meaning:"conectar, compañero",unit:"U10",
+    family:[{he:"מחברת",sp:"cuaderno"},{he:"חבר",sp:"amigo"},{he:"חברה",sp:"compañía/sociedad"},{he:"להתחבר",sp:"conectarse"}],
+    note:"חָבֵר (amigo) y מַחְבֶּרֶת (cuaderno) comparten raíz — lo que conecta. El cuaderno es 'lo que une páginas'."},
+  {letters:"מ-ס-ע-ד",tr:"M-S-A-D",meaning:"banquete, comida ceremonial",unit:"U20",
+    family:[{he:"מסעדה",sp:"restaurante"},{he:"סעודה",sp:"banquete"},{he:"סעודת שבת",sp:"cena del Shabat"},{he:"סעודת פורים",sp:"banquete de Purim"}],
+    note:"El restaurante en hebreo es 'el lugar del banquete'. La raíz conecta lo cotidiano del menú con la mesa ritual del Shabat y las fiestas."},
+  {letters:"ג-ד-ל",tr:"G-D-L",meaning:"grande, crecer",unit:"U20",
+    family:[{he:"גדול",sp:"grande"},{he:"גדולה",sp:"grande (f.)"},{he:"לגדול",sp:"crecer"},{he:"גדולים",sp:"grandes"},{he:"מגדל",sp:"torre"}],
+    note:"מִגְדָּל (torre) = 'lo que crece/es grande'. La misma raíz de Migdal (ciudad bíblica) y en Cabalá, גְּדוּלָּה (Guedulá) es otro nombre de la sefirot Jésed — grandeza/amor."},
+  {letters:"י-ל-ד",tr:"Y-L-D",meaning:"niño, nacimiento",unit:"U11",
+    family:[{he:"ילד",sp:"niño"},{he:"ילדה",sp:"niña"},{he:"ילדים",sp:"niños"},{he:"ילדות",sp:"niñas"},{he:"להוליד",sp:"dar a luz"},{he:"תולדות",sp:"generaciones"}],
+    note:"תּוֹלְדוֹת (generaciones) — el Génesis usa esta raíz para las genealogías. La misma raíz conecta niño, niñez y el acto de nacer."},
+  {letters:"ק-ר-א",tr:"K-R-A",meaning:"leer, llamar, nombrar",unit:"U13",
+    family:[{he:"קורא",sp:"lee"},{he:"לקרוא",sp:"leer"},{he:"קרא",sp:"leyó/llamó"},{he:"מקרא",sp:"Biblia"},{he:"קריאה",sp:"lectura/llamado"},{he:"קרא בשם",sp:"llamó por nombre"}],
+    note:"מִקְרָא (Mikrá) = 'lo que se lee' — nombre hebreo de la Biblia. En el Génesis: 'וַיִּקְרָא אֱלֹהִים לָאוֹר יוֹם' — 'Y Dios llamó a la luz día.' Leer y nombrar comparten raíz."},
+  {letters:"ש-ת-ה",tr:"SH-T-H",meaning:"beber, banquete",unit:"U13",
+    family:[{he:"שותה",sp:"bebe"},{he:"לשתות",sp:"beber"},{he:"שתה",sp:"bebió"},{he:"משתה",sp:"banquete/festín"},{he:"שתיה",sp:"bebida"}],
+    note:"מִשְׁתֶּה (festín) = 'el acto de beber'. El libro de Ester gira en torno a מִשְׁתֶּה reales. La raíz conecta el verbo cotidiano con el ritual del banquete bíblico."},
+  {letters:"ד-ב-ר",tr:"D-V-R",meaning:"palabra, hablar",unit:"U14",
+    family:[{he:"מדבר",sp:"habla"},{he:"לדבר",sp:"hablar"},{he:"דבר",sp:"palabra/cosa"},{he:"דברים",sp:"Deuteronomio"},{he:"מדבר",sp:"desierto"},{he:"דיבור",sp:"habla/discurso"}],
+    note:"דְּבָרִים (Deuteronomio) = 'Las Palabras'. מִדְבָּר (desierto) = 'el lugar sin palabras'. En Cabalá, el דִּבּוּר es la manifestación más externa del pensamiento divino — la palabra es la frontera entre lo interno y lo externo."},
+  {letters:"ע-ש-ה",tr:"A-S-H",meaning:"hacer, actuar",unit:"U14",
+    family:[{he:"עושה",sp:"hace"},{he:"לעשות",sp:"hacer"},{he:"עשה",sp:"hizo"},{he:"מעשה",sp:"acto/obra"},{he:"בראשית עשה",sp:"en el principio hizo"}],
+    note:"וַיַּעַשׂ אֱלֹהִים (Génesis 1) — 'Y Dios hizo'. La raíz del verbo de la creación. מַעֲשֶׂה (obra/acción) aparece en 'מַעֲשֵׂה בְּרֵאשִׁית' — las obras de la creación."},
+  {letters:"ב-י-נ",tr:"B-Y-N",meaning:"entender, discernir",unit:"U14",
+    family:[{he:"מבין",sp:"entiende"},{he:"להבין",sp:"entender"},{he:"הבין",sp:"entendió"},{he:"בינה",sp:"comprensión/entendimiento"},{he:"לבין",sp:"entre"}],
+    note:"בִּינָה (Biná) = comprensión — es la tercera sefirot en Cabalá, llamada 'la madre superior'. La misma raíz del verbo cotidiano מֵבִין es el nombre de una de las sefirot más profundas."},
+  {letters:"ר-צ-ה",tr:"R-TS-H",meaning:"querer, desear",unit:"U15",
+    family:[{he:"רוצה",sp:"quiere"},{he:"לרצות",sp:"querer"},{he:"רצון",sp:"voluntad/deseo"},{he:"רצה",sp:"quiso"},{he:"ברצון",sp:"con gusto"}],
+    note:"רָצוֹן (Ratson) = voluntad — concepto central en Cabalá. La voluntad divina (רְצוֹן הָאֵל) es el origen de la creación. El mismo verbo cotidiano 'quiero' comparte raíz con la voluntad primordial."},
+  {letters:"ש-א-ל",tr:"SH-A-L",meaning:"preguntar, pedir prestado",unit:"U15",
+    family:[{he:"שואל",sp:"pregunta"},{he:"לשאול",sp:"preguntar"},{he:"שאלה",sp:"pregunta"},{he:"שאל",sp:"preguntó/pidió prestado"}],
+    note:"שְׁאֵלָה (pregunta) y שְׁאוֹל (el inframundo bíblico) comparten raíz — el lugar al que 'se le pregunta' a los muertos. La misma raíz del verbo cotidiano conecta con la cosmología bíblica."},
+  {letters:"י-ד-ע",tr:"Y-D-A",meaning:"saber, conocer",unit:"U15",
+    family:[{he:"יודע",sp:"sabe"},{he:"לדעת",sp:"saber"},{he:"ידע",sp:"supo"},{he:"דעת",sp:"conocimiento"},{he:"עץ הדעת",sp:"árbol del conocimiento"}],
+    note:"עֵץ הַדַּעַת (árbol del conocimiento) en Génesis usa esta raíz. דַּעַת (Daat) es la sefirot oculta — el conocimiento íntimo. יָדַע en bíblico también significa 'conocer' en sentido íntimo (Adán conoció a Eva)."},
+  {letters:"א-מ-ר",tr:"A-M-R",meaning:"decir, hablar",unit:"U16",
+    family:[{he:"אומר",sp:"dice"},{he:"לומר",sp:"decir (irregular)"},{he:"אמר",sp:"dijo"},{he:"אמרה",sp:"dicho/afirmación"},{he:"מאמר",sp:"artículo/ensayo"}],
+    note:"לוֹמַר es el único infinitivo irregular importante de pa'al en el nivel básico. אָמַר (dijo) es el verbo más frecuente en la narrativa bíblica — introduce cada discurso directo. 'וַיֹּאמֶר אֱלֹהִים' (Y dijo Dios) aparece decenas de veces en el Génesis."},
+  {letters:"י-ד-ה",tr:"Y-D-H",meaning:"agradecer, confesar, alabar",unit:"U17",
+    family:[{he:"תודה",sp:"gracias"},{he:"הודיה",sp:"agradecimiento"},{he:"יהודה",sp:"Judá/Judío"},{he:"יהודי",sp:"judío"},{he:"יהוה",sp:"YHVH"}],
+    note:"תּוֹדָה (gracias) y יְהוּדָה (Judá) comparten raíz י-ד-ה. El nombre 'judío' (יְהוּדִי) viene de אוֹדֶה אֶת ה' (alabaré a Dios) — Léa nombró a su hijo Judá diciendo esto. El pueblo judío lleva en su nombre la raíz de 'gracias'."},
+  {letters:"ב-ק-ש",tr:"B-K-SH",meaning:"pedir, buscar, solicitar",unit:"U17",
+    family:[{he:"בבקשה",sp:"por favor"},{he:"בקשה",sp:"pedido/solicitud"},{he:"לבקש",sp:"pedir"},{he:"מבקש",sp:"solicita/pide"}],
+    note:"בַּקָּשָׁה (solicitud) es la forma sustantiva — literalmente 'lo pedido'. בְּבַקָּשָׁה = 'en mi pedido/con mi solicitud'. La raíz conecta la cortesía cotidiana con el acto formal de petición."},
+  {letters:"ע-ש-ר",tr:"A-S-R",meaning:"diez, diezmo",unit:"U18",
+    family:[{he:"עשר",sp:"diez"},{he:"עשרה",sp:"diez (m.)"},{he:"עשרים",sp:"veinte"},{he:"מעשר",sp:"diezmo"},{he:"עשרת הדברות",sp:"los Diez Mandamientos"}],
+    note:"עֲשֶׂרֶת הַדִּבְּרוֹת (los Diez Mandamientos) — literalmente 'las diez palabras'. La misma raíz del número cotidiano es la de los mandamientos del Sinaí. מַעֲשֵׂר (diezmo) = 'una décima parte'."},
+  {letters:"א-ח-ד",tr:"A-J-D",meaning:"uno, unidad",unit:"U18",
+    family:[{he:"אחת",sp:"una (f.)"},{he:"אחד",sp:"uno (m.)"},{he:"אחד",sp:"unido/único"},{he:"שמע ישראל",sp:"escucha Israel..."},{he:"יחיד",sp:"único"}],
+    note:"שְׁמַע יִשְׂרָאֵל ה׳ אֱלֹהֵינוּ ה׳ אֶחָד — 'Escucha Israel, el Señor nuestro Dios, el Señor es Uno.' La oración central del judaísmo termina con אֶחָד — el mismo número que se aprende en U18."},
+  {letters:"ע-ב-ד",tr:"A-V-D",meaning:"trabajar, servir, esclavo",unit:"U19",
+    family:[{he:"עובד",sp:"trabaja"},{he:"לעבוד",sp:"trabajar"},{he:"עבודה",sp:"trabajo"},{he:"עבד",sp:"esclavo/siervo"},{he:"עבד ה׳",sp:"siervo de Dios"}],
+    note:"עֶבֶד (siervo/esclavo) y עֲבוֹדָה (trabajo) comparten raíz. En hebreo bíblico la esclavitud en Egipto se llama עֲבוֹדַת פֶּרֶךְ (trabajo duro). En la tradición judía, עֲבוֹדַת ה׳ (el servicio a Dios) es la misma raíz — el trabajo sagrado."},
+  {letters:"ע-ר-ב",tr:"A-R-V",meaning:"tarde, mezclar, garantizar",unit:"U19",
+    family:[{he:"ערב",sp:"tarde/víspera"},{he:"ערב שבת",sp:"víspera del Shabat"},{he:"ערבי",sp:"árabe"},{he:"ערבוב",sp:"mezcla"},{he:"מערב",sp:"occidente/oeste"}],
+    note:"עֶרֶב (tarde) y מַעֲרָב (oeste/occidente) comparten raíz — el oeste es 'la dirección de la tarde', donde se pone el sol. עֶרֶב שַׁבָּת (víspera del Shabat) es el viernes por la tarde — el momento más sagrado de la semana judía."},
+];
+
+// ===== SM-2 =====
+const SK='hebreo_sr_v3';
+const DEF_EF=2.5,MIN_EF=1.3;
+let srData={};
+
+function initSR(){
+  let loaded=false;
+  try{const raw=localStorage.getItem(SK);if(raw){srData=JSON.parse(raw);loaded=true;}}catch(e){}
+  VOCAB.forEach((w,i)=>{if(!srData[i])srData[i]={ef:DEF_EF,interval:0,reps:0,due:Date.now(),errors:0,hints:0,seen:0};});
+  const dot=document.getElementById('storeDot'),lbl=document.getElementById('storeLabel');
+  try{localStorage.setItem('_t','1');localStorage.removeItem('_t');dot.classList.add('active');
+    lbl.textContent=loaded?`datos guardados · ${Object.values(srData).filter(s=>s.seen>0).length} palabras con historial`:'almacenamiento activo';}
+  catch(e){lbl.textContent='sin almacenamiento local · datos solo esta sesión';}
+}
+function saveSR(){try{localStorage.setItem(SK,JSON.stringify(srData));}catch(e){}}
+function sm2(idx,q){
+  const s=srData[idx];if(!s)return;
+  if(q<2){s.reps=0;s.interval=1;}
+  else{
+    if(s.reps===0)s.interval=1;else if(s.reps===1)s.interval=6;else s.interval=Math.round(s.interval*s.ef);
+    s.reps++;
+    s.ef=Math.max(MIN_EF,s.ef+0.1-(4-q)*(0.08+(4-q)*0.02));
+  }
+  s.due=Date.now()+s.interval*86400000;saveSR();
+}
+function isDue(i){const s=srData[i];return s&&s.due<=Date.now()+60000;}
+function getDue(){return VOCAB.map((w,i)=>({...w,idx:i})).filter(w=>isDue(w.idx));}
+function getDiff(i){const s=srData[i];if(!s||s.seen===0)return 0;return Math.min(1,(s.errors/s.seen)+(s.hints*0.5/s.seen));}
+function getWeak(){return VOCAB.map((w,i)=>({...w,idx:i,diff:getDiff(i),...srData[i]})).filter(w=>w.diff>0).sort((a,b)=>b.diff-a.diff);}
+function fmtNext(i){const s=srData[i];if(!s||s.seen===0)return 'nueva';const ms=s.due-Date.now();if(ms<=0)return 'hoy';const d=Math.ceil(ms/86400000);if(d===1)return 'mañana';if(d<7)return `en ${d}d`;if(d<30)return `en ${Math.ceil(d/7)}sem`;return `en ${Math.ceil(d/30)}mes`;}
+function srCls(i){const s=srData[i];if(!s||s.seen===0)return{cls:'new',pct:20};if(isDue(i))return{cls:'hard',pct:100};if(s.reps<3)return{cls:'young',pct:50};return{cls:'mature',pct:Math.max(5,100-Math.min(90,s.interval))};}
+
+// ===== PRACTICE STATE =====
+let words=[],widx=0,correct=0,wrong=0,hints=0,streak=0,hintUsed=false,answered=false,waitRate=false,curUnit='all',curWordIdx=-1;
+
+function filtered(){
+  if(curUnit==='all')return VOCAB.map((w,i)=>({...w,idx:i}));
+  if(curUnit==='due')return getDue();
+  if(curUnit==='weak')return getWeak();
+  return VOCAB.map((w,i)=>({...w,idx:i})).filter(w=>w.unit.toLowerCase()===curUnit||w.unit.toLowerCase().replace('u','u')===curUnit);
+}
+function weighted(ws){const q=[];ws.forEach(w=>{const d=getDiff(w.idx);const wt=d>.5?3:d>.2?2:1;for(let j=0;j<wt;j++)q.push(w);});return q.sort(()=>Math.random()-.5);}
+function shuf(a){return[...a].sort(()=>Math.random()-.5);}
+function setUnit(u){curUnit=u;['all','due','u1','u2','u3','u4','u5','u6','u7','u8','u9','u10','u11','u12','u13','u14','u15','u16','u17','u18','u19','u20','weak'].forEach(x=>{const el=document.getElementById('ubtn-'+x);if(el)el.classList.toggle('active',x===u);});restart();}
+function startDue(){curUnit='due';setUnit('due');}
+function repeatWeak(){curUnit='weak';setUnit('weak');}
+
+function restart(){
+  words=weighted(filtered());widx=0;correct=0;wrong=0;hints=0;streak=0;
+  updateStats();updateBanners();
+  document.getElementById('practiceCard').style.display='block';
+  document.getElementById('completeScreen').className='complete';
+  document.getElementById('mnemPanel').className='mnem';
+  loadWord();
+}
+function restartShuffle(){words=shuf(filtered());widx=0;correct=0;wrong=0;hints=0;streak=0;updateStats();document.getElementById('practiceCard').style.display='block';document.getElementById('completeScreen').className='complete';document.getElementById('mnemPanel').className='mnem';loadWord();}
+
+function updateBanners(){
+  const due=getDue(),weak=getWeak();
+  const db=document.getElementById('dueBanner');
+  if(due.length>0&&curUnit==='all'){db.className='due-banner show';document.getElementById('dueCount').textContent=due.length;}else db.className='due-banner';
+  const rb=document.getElementById('reinforceBanner');
+  if(weak.length>0&&curUnit==='all'){rb.className='rbanner show';document.getElementById('reinforceCount').textContent=weak.length;}else rb.className='rbanner';
+  const dB=document.getElementById('dueBadge');if(due.length>0){dB.textContent=due.length;dB.style.display='inline-block';}else dB.style.display='none';
+  const wB=document.getElementById('weakBadge');if(weak.length>0){wB.textContent=weak.length;wB.style.display='inline-block';}else wB.style.display='none';
+}
+
+function loadWord(){
+  if(widx>=words.length){showComplete();return;}
+  const w=words[widx];curWordIdx=w.idx;
+  answered=false;hintUsed=false;waitRate=false;
+  srData[w.idx].seen++;
+  document.getElementById('pword').textContent=w.es;
+  document.getElementById('phint').textContent=w.pr;
+  document.getElementById('proot').textContent=w.root?`Raíz: ${w.root}`:'';
+  const b=document.getElementById('ubadge');b.textContent=w.unit;b.className=`ubadge badge-${w.unit}`;
+  document.getElementById('srNext').textContent=fmtNext(w.idx);
+  const{cls,pct}=srCls(w.idx);const sf=document.getElementById('srFill');sf.className=`sr-fill ${cls}`;sf.style.height=pct+'%';
+  document.getElementById('hinput').value='';document.getElementById('hinput').disabled=false;
+  document.getElementById('feedback').className='feedback';document.getElementById('answer').className='answer';
+  document.getElementById('btnCheck').style.display='inline-block';document.getElementById('btnNext').style.display='none';
+  document.getElementById('btnHint').disabled=false;
+  document.getElementById('srRating').className='sr-rating';document.getElementById('ratingLbl').style.display='none';
+  document.getElementById('mnemPanel').className='mnem';
+  document.querySelector('.card').className='card';
+  document.getElementById('pfill').style.width=(widx/words.length*100)+'%';
+  document.getElementById('plabel').textContent=`${widx+1} / ${words.length}`;
+  setTimeout(()=>document.getElementById('hinput').focus(),80);
+}
+
+function norm(s){return s.trim().replace(/\s+/g,' ');}
+function doCheck(){
+  if(answered||waitRate)return;
+  const input=document.getElementById('hinput').value;const w=words[widx];
+  answered=true;document.getElementById('hinput').disabled=true;
+  document.getElementById('btnCheck').style.display='none';document.getElementById('btnHint').disabled=true;
+  const fb=document.getElementById('feedback'),card=document.querySelector('.card');
+  if(norm(input)===norm(w.he)){
+    fb.className='feedback show fok';document.getElementById('ficon').textContent='✓';
+    document.getElementById('ftext').textContent=hintUsed?'Correcto (con pista)':'Correcto';
+    card.className='card ok pulse';if(!hintUsed){correct++;streak++;}else streak=0;
+  }else{
+    fb.className='feedback show fbad';document.getElementById('ficon').textContent='✗';
+    document.getElementById('ftext').textContent=`Correcto: ${w.he}  (${w.pr})`;
+    const a=document.getElementById('answer');a.textContent=w.he;a.className='answer show';
+    card.className='card bad shake';wrong++;streak=0;srData[w.idx].errors++;
+    showMnem(w);
+  }
+  updateStats();updateBanners();saveSR();showRating();
+}
+function showRating(){waitRate=true;document.getElementById('ratingLbl').style.display='block';document.getElementById('srRating').className='sr-rating show';}
+function rate(q){sm2(curWordIdx,q);waitRate=false;document.getElementById('srRating').className='sr-rating';document.getElementById('ratingLbl').style.display='none';document.getElementById('btnNext').style.display='inline-block';}
+function doHint(){hintUsed=true;const w=words[widx];srData[w.idx].hints++;document.getElementById('phint').textContent=`💡 ${w.hint}`;document.getElementById('btnHint').disabled=true;hints++;updateStats();saveSR();}
+function doNext(){document.getElementById('mnemPanel').className='mnem';widx++;loadWord();}
+function updateStats(){document.getElementById('sCorr').textContent=correct;document.getElementById('sWrong').textContent=wrong;document.getElementById('sHints').textContent=hints;document.getElementById('sStreak').textContent=streak;}
+
+function showComplete(){
+  document.getElementById('practiceCard').style.display='none';
+  document.getElementById('completeScreen').className='complete show';
+  const pct=Math.round((correct/Math.max(1,correct+wrong))*100);
+  document.getElementById('cscore').textContent=`${correct}/${correct+wrong}`;
+  const msg=pct===100?'Sin errores. Intervalos SR actualizados.':pct>=70?'Base sólida. El algoritmo ajustó los intervalos.':pct>=40?'Repetición deliberada. El SR priorizará las difíciles.':'Usá el modo débiles y los mnemónicos.';
+  document.getElementById('cmsg').textContent=msg;
+  document.getElementById('pfill').style.width='100%';
+  const weak=getWeak();const ws=document.getElementById('weakSummary');const wl=document.getElementById('weakList');
+  if(weak.length>0){ws.style.display='block';wl.innerHTML=weak.slice(0,5).map(w=>`<div class="weak-item"><div><div class="weak-he">${w.he}</div><div class="weak-es">${w.es}</div></div><div class="weak-sc">✗${w.errors} 💡${w.hints}</div></div>`).join('');document.getElementById('btnRepWeak').style.display='block';}
+  updateBanners();
+}
+
+// ===== MNEMONIC =====
+async function genMnem(word,container){
+  container.innerHTML=`<div class="mnem-body"><div class="dpulse"><span></span><span></span><span></span></div></div>`;
+  const p=`Experto en hebreo y memoria para hispanohablantes.\nGenera UN mnemónico conciso en español para recordar cómo ESCRIBIR esta palabra en hebreo.\n\nPalabra: ${word.es}\nHebreo: ${word.he}\nPronunciación: ${word.pr}\n${word.root?`Raíz: ${word.root}`:''}\n${word.hint?`Pista: ${word.hint}`:''}\n\nMáximo 2 oraciones. Conectar forma/sonido de letras con algo memorable. Si hay letras confusas (ע vs א, ט vs ת, ח vs כ, צ vs ס) mencionarlas.\nResponde SOLO el mnemónico, sin preámbulo.`;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:p}]})});
+    const d=await r.json();const t=d.content?.filter(b=>b.type==='text').map(b=>b.text).join('')||'';
+    if(t.trim())container.innerHTML=`<div class="mnem-body fi">${t.trim()}</div>`;
+    else container.innerHTML=`<div class="mnem-body" style="color:var(--bad)">No se pudo generar.</div>`;
+  }catch(e){container.innerHTML=`<div class="mnem-body" style="color:var(--bad)">Error de conexión.</div>`;}
+}
+function showMnem(w){const p=document.getElementById('mnemPanel');p.className='mnem show';document.getElementById('mnemWord').textContent=w.he;genMnem(w,document.getElementById('mnemBody'));}
+
+// ===== SCHEDULE TAB =====
+function renderSchedule(){
+  const c=document.getElementById('schedContent');
+  const sorted=VOCAB.map((w,i)=>({...w,idx:i,...srData[i]})).filter(w=>w.seen>0).sort((a,b)=>a.due-b.due);
+  if(!sorted.length){c.innerHTML='<div class="empty">Practica palabras para que aparezcan en la agenda.</div>';return;}
+  c.innerHTML=sorted.map(w=>{
+    const ms=w.due-Date.now(),due=ms<=0,soon=ms<86400000&&ms>0;
+    const cls=due?'due-now':soon?'due-soon':'';
+    const nc=due?'now':soon?'soon':'later';
+    const nt=due?'HOY':fmtNext(w.idx);
+    const intv=w.interval===0?'nueva':`cada ${w.interval}d`;
+    return `<div class="sched-item ${cls}"><div class="sched-top"><div class="sched-he">${w.he}</div><div class="sched-next ${nc}">${nt}</div></div><div class="sched-es">${w.es} · <span style="color:var(--dim)">${w.pr}</span></div><div class="sched-meta"><span class="sched-int">${intv}</span><span>✗${w.errors} 💡${w.hints}</span><span>${w.unit}</span></div></div>`;
+  }).join('');
+}
+
+// ===== WEAK TAB =====
+function renderWeak(){
+  const c=document.getElementById('weakContent');const weak=getWeak();
+  if(!weak.length){c.innerHTML='<div class="empty">Sin palabras problemáticas aún.</div>';return;}
+  c.innerHTML=weak.map((w,i)=>{
+    const pct=Math.min(100,Math.round(w.diff*100));
+    return `<div class="wti" id="wti-${i}"><div class="wti-top"><div class="wti-he">${w.he}</div><span style="font-size:8px;color:var(--dim)">${w.unit}</span></div><div class="wti-es">${w.es} · <span style="color:var(--dim)">${w.pr}</span></div><div class="wti-meta"><span class="wti-err">✗ ${w.errors} error${w.errors!==1?'es':''}</span><span class="wti-hnt">💡 ${w.hints}</span><span>${w.seen} vistas</span></div><div class="wti-bar"><div class="wti-bfill" style="width:${pct}%"></div></div><div class="wti-mnem" id="wm-${i}"><div class="wti-mlbl">Mnemónico · IA</div><div class="wti-mtext" id="wmt-${i}"></div></div><button class="wti-btn" id="wb-${i}" onclick="genWeak(${i},${w.idx})">Generar mnemónico</button></div>`;
+  }).join('');
+}
+async function genWeak(i,vIdx){
+  const w=VOCAB[vIdx];const btn=document.getElementById(`wb-${i}`);const mDiv=document.getElementById(`wm-${i}`);const tDiv=document.getElementById(`wmt-${i}`);const item=document.getElementById(`wti-${i}`);
+  btn.disabled=true;btn.textContent='Generando...';item.classList.add('gen');mDiv.className='wti-mnem show';
+  tDiv.innerHTML='<div class="dpulse"><span></span><span></span><span></span></div>';
+  const p=`Experto en hebreo y memoria para hispanohablantes.\nGenera UN mnemónico conciso en español para recordar cómo ESCRIBIR esta palabra en hebreo.\n\nPalabra: ${w.es}\nHebreo: ${w.he}\nPronunciación: ${w.pr}\n${w.root?`Raíz: ${w.root}`:''}\n${w.hint?`Pista: ${w.hint}`:''}\n\nMáximo 2 oraciones. Concreto, visual. Mencionar letras confusas si las hay.\nResponde SOLO el mnemónico.`;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:p}]})});
+    const d=await r.json();const t=d.content?.filter(b=>b.type==='text').map(b=>b.text).join('')||'';
+    if(t.trim()){tDiv.innerHTML=`<span class="fi">${t.trim()}</span>`;btn.textContent='✓ Regenerar';btn.disabled=false;}
+    else{tDiv.textContent='No se pudo generar.';btn.textContent='Reintentar';btn.disabled=false;}
+  }catch(e){tDiv.textContent='Error.';btn.textContent='Reintentar';btn.disabled=false;}
+  item.classList.remove('gen');
+}
+
+// ===== GRAMMAR =====
+function showGUnit(id){
+  document.querySelectorAll('.g-unit-content').forEach(el=>el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const map={'g-all':'all','g-u1':'u1','g-u2':'u2','g-u3':'u3','g-u4':'u4','g-u5':'u5','g-u6':'u6','g-u7':'u7','g-u8':'u8','g-u9':'u9','g-u10':'u10','g-u11':'u11','g-u12':'u12','g-u13':'u13','g-u14':'u14','g-u15':'u15','g-u16':'u16','g-u17':'u17','g-u18':'u18','g-u19':'u19','g-u20':'u20','g-roots':'roots'};
+  document.querySelectorAll('.g-ubtn').forEach(b=>b.classList.remove('active'));
+  const key=Object.entries(map).find(([k])=>k===id)?.[0];
+  document.getElementById('gbtn-'+map[id])?.classList.add('active');
+  if(id==='g-roots') renderRoots();
+}
+
+function renderRoots(){
+  const g=document.getElementById('rootsGrid');
+  g.innerHTML=ROOTS.map(r=>`<div class="root-card"><div style="font-size:8px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px">${r.unit}</div><div class="root-letters">${r.letters}</div><div class="root-tr">${r.tr} · ${r.meaning}</div><div class="root-family">${r.family.map(w=>`<div class="root-word">${w.he}<span>${w.sp}</span></div>`).join('')}</div><div class="root-note">◈ ${r.note}</div></div>`).join('');
+}
+
+// ===== TABS =====
+function switchTab(tab){
+  ['practice','grammar','schedule','weak'].forEach(t=>{const el=document.getElementById('tab-'+t);if(el)el.style.display=t===tab?'block':'none';});
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['practice','grammar','schedule','weak'][i]===tab));
+  if(tab==='schedule')renderSchedule();
+  if(tab==='weak')renderWeak();
+}
+
+// ===== KEYBOARD =====
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('tab-practice').style.display!=='none'){
+    if(e.key==='Enter'&&!waitRate){if(!answered)doCheck();else if(!waitRate)doNext();}
+    if(e.key==='Tab'){e.preventDefault();if(answered&&!waitRate)doNext();}
+  }
+});
+
+// ===== INIT =====
+initSR();restart();
+</script>
+</body>
+</html>
