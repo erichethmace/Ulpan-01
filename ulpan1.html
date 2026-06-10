@@ -197,6 +197,11 @@ header{text-align:center;margin-bottom:18px}
   <div class="title">יחידות א׳–י״א · כ׳ · Unidades 1–19, 20</div>
   <div class="sub">Práctica · Gramática · Agenda SR · Débiles</div>
   <div class="store-status"><div class="store-dot" id="storeDot"></div><div class="store-label" id="storeLabel">...</div></div>
+  <div style="display:flex;gap:6px;justify-content:center;margin-top:8px">
+    <button class="btn" style="flex:none;padding:6px 12px;font-size:8px" onclick="exportSR()">⬇ Exportar datos</button>
+    <button class="btn" style="flex:none;padding:6px 12px;font-size:8px" onclick="document.getElementById('importFile').click()">⬆ Importar</button>
+    <input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="importSR(event)">
+  </div>
 </header>
 
 <div class="tabs">
@@ -1574,22 +1579,86 @@ const ROOTS=[
 ];
 
 // ===== SM-2 =====
-const SK='hebreo_sr_v3';
+const SK='hebreo_sr_v4';
+const OLD_SK='hebreo_sr_v3';
 const DEF_EF=2.5,MIN_EF=1.3;
 let srData={};
 
+// Clave estable: independiente de la posición en la lista.
+// Insertar unidades nuevas ya no corrompe el historial.
+function wordKey(w){return w.he+'|'+w.es;}
+function S(i){return srData[wordKey(VOCAB[i])];}
+
+function blankCard(){return {ef:DEF_EF,interval:0,reps:0,due:Date.now(),errors:0,hints:0,seen:0};}
+
 function initSR(){
-  let loaded=false;
-  try{const raw=localStorage.getItem(SK);if(raw){srData=JSON.parse(raw);loaded=true;}}catch(e){}
-  VOCAB.forEach((w,i)=>{if(!srData[i])srData[i]={ef:DEF_EF,interval:0,reps:0,due:Date.now(),errors:0,hints:0,seen:0};});
+  let loaded=false, migrated=0;
+  try{
+    const raw=localStorage.getItem(SK);
+    if(raw){srData=JSON.parse(raw);loaded=true;}
+    else{
+      // Migración única desde v3 (indexado por posición)
+      const old=localStorage.getItem(OLD_SK);
+      if(old){
+        const oldData=JSON.parse(old);
+        VOCAB.forEach((w,i)=>{
+          const e=oldData[i];
+          if(e&&e.seen>0){
+            const k=wordKey(w);
+            if(!srData[k]||e.seen>srData[k].seen){srData[k]=e;}
+            migrated++;
+          }
+        });
+        if(migrated>0){loaded=true;}
+      }
+    }
+  }catch(e){}
+  VOCAB.forEach(w=>{const k=wordKey(w);if(!srData[k])srData[k]=blankCard();});
+  if(migrated>0){try{localStorage.setItem(SK,JSON.stringify(srData));}catch(e){}}
   const dot=document.getElementById('storeDot'),lbl=document.getElementById('storeLabel');
   try{localStorage.setItem('_t','1');localStorage.removeItem('_t');dot.classList.add('active');
-    lbl.textContent=loaded?`datos guardados · ${Object.values(srData).filter(s=>s.seen>0).length} palabras con historial`:'almacenamiento activo';}
+    const n=Object.values(srData).filter(s=>s.seen>0).length;
+    lbl.textContent=migrated>0?`historial migrado al nuevo formato · ${n} palabras`:(loaded?`datos guardados · ${n} palabras con historial`:'almacenamiento activo');}
   catch(e){lbl.textContent='sin almacenamiento local · datos solo esta sesión';}
 }
 function saveSR(){try{localStorage.setItem(SK,JSON.stringify(srData));}catch(e){}}
+
+// ===== EXPORT / IMPORT =====
+function exportSR(){
+  const payload={app:'hebreo-ulpan',version:4,exported:new Date().toISOString(),data:srData};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='hebreo-sr-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1000);
+}
+function importSR(ev){
+  const file=ev.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=()=>{
+    try{
+      const payload=JSON.parse(reader.result);
+      const data=payload.data||payload;
+      if(typeof data!=='object'||data===null)throw new Error('formato');
+      let restored=0;
+      Object.entries(data).forEach(([k,v])=>{
+        if(!v||typeof v.seen!=='number')return;
+        // Compatibilidad: backups viejos indexados por posición
+        const key=/^\d+$/.test(k)&&VOCAB[+k]?wordKey(VOCAB[+k]):k;
+        const cur=srData[key];
+        if(!cur||v.seen>=cur.seen){srData[key]=v;restored++;}
+      });
+      saveSR();
+      alert('Importado: '+restored+' palabras con historial.');
+      initSR();restart();
+    }catch(e){alert('Archivo inválido. Usá un backup exportado por esta app.');}
+    ev.target.value='';
+  };
+  reader.readAsText(file);
+}
 function sm2(idx,q){
-  const s=srData[idx];if(!s)return;
+  const s=S(idx);if(!s)return;
   if(q<2){s.reps=0;s.interval=1;}
   else{
     if(s.reps===0)s.interval=1;else if(s.reps===1)s.interval=6;else s.interval=Math.round(s.interval*s.ef);
@@ -1598,12 +1667,13 @@ function sm2(idx,q){
   }
   s.due=Date.now()+s.interval*86400000;saveSR();
 }
-function isDue(i){const s=srData[i];return s&&s.due<=Date.now()+60000;}
+function isDue(i){const s=S(i);return s&&s.due<=Date.now()+60000;}
 function getDue(){return VOCAB.map((w,i)=>({...w,idx:i})).filter(w=>isDue(w.idx));}
-function getDiff(i){const s=srData[i];if(!s||s.seen===0)return 0;return Math.min(1,(s.errors/s.seen)+(s.hints*0.5/s.seen));}
-function getWeak(){return VOCAB.map((w,i)=>({...w,idx:i,diff:getDiff(i),...srData[i]})).filter(w=>w.diff>0).sort((a,b)=>b.diff-a.diff);}
-function fmtNext(i){const s=srData[i];if(!s||s.seen===0)return 'nueva';const ms=s.due-Date.now();if(ms<=0)return 'hoy';const d=Math.ceil(ms/86400000);if(d===1)return 'mañana';if(d<7)return `en ${d}d`;if(d<30)return `en ${Math.ceil(d/7)}sem`;return `en ${Math.ceil(d/30)}mes`;}
-function srCls(i){const s=srData[i];if(!s||s.seen===0)return{cls:'new',pct:20};if(isDue(i))return{cls:'hard',pct:100};if(s.reps<3)return{cls:'young',pct:50};return{cls:'mature',pct:Math.max(5,100-Math.min(90,s.interval))};}
+function getDiff(i){const s=S(i);if(!s||s.seen===0)return 0;return Math.min(1,(s.errors/s.seen)+(s.hints*0.5/s.seen));}
+function isFirst(i){const k=wordKey(VOCAB[i]);for(let j=0;j<i;j++){if(wordKey(VOCAB[j])===k)return false;}return true;}
+function getWeak(){return VOCAB.map((w,i)=>({...w,idx:i,diff:getDiff(i),...S(i)})).filter((w)=>w.diff>0&&isFirst(w.idx)).sort((a,b)=>b.diff-a.diff);}
+function fmtNext(i){const s=S(i);if(!s||s.seen===0)return 'nueva';const ms=s.due-Date.now();if(ms<=0)return 'hoy';const d=Math.ceil(ms/86400000);if(d===1)return 'mañana';if(d<7)return `en ${d}d`;if(d<30)return `en ${Math.ceil(d/7)}sem`;return `en ${Math.ceil(d/30)}mes`;}
+function srCls(i){const s=S(i);if(!s||s.seen===0)return{cls:'new',pct:20};if(isDue(i))return{cls:'hard',pct:100};if(s.reps<3)return{cls:'young',pct:50};return{cls:'mature',pct:Math.max(5,100-Math.min(90,s.interval))};}
 
 // ===== PRACTICE STATE =====
 let words=[],widx=0,correct=0,wrong=0,hints=0,streak=0,hintUsed=false,answered=false,waitRate=false,curUnit='all',curWordIdx=-1;
@@ -1644,7 +1714,7 @@ function loadWord(){
   if(widx>=words.length){showComplete();return;}
   const w=words[widx];curWordIdx=w.idx;
   answered=false;hintUsed=false;waitRate=false;
-  srData[w.idx].seen++;
+  S(w.idx).seen++;
   document.getElementById('pword').textContent=w.es;
   document.getElementById('phint').textContent=w.pr;
   document.getElementById('proot').textContent=w.root?`Raíz: ${w.root}`:'';
@@ -1678,14 +1748,14 @@ function doCheck(){
     fb.className='feedback show fbad';document.getElementById('ficon').textContent='✗';
     document.getElementById('ftext').textContent=`Correcto: ${w.he}  (${w.pr})`;
     const a=document.getElementById('answer');a.textContent=w.he;a.className='answer show';
-    card.className='card bad shake';wrong++;streak=0;srData[w.idx].errors++;
+    card.className='card bad shake';wrong++;streak=0;S(w.idx).errors++;
     showMnem(w);
   }
   updateStats();updateBanners();saveSR();showRating();
 }
 function showRating(){waitRate=true;document.getElementById('ratingLbl').style.display='block';document.getElementById('srRating').className='sr-rating show';}
 function rate(q){sm2(curWordIdx,q);waitRate=false;document.getElementById('srRating').className='sr-rating';document.getElementById('ratingLbl').style.display='none';document.getElementById('btnNext').style.display='inline-block';}
-function doHint(){hintUsed=true;const w=words[widx];srData[w.idx].hints++;document.getElementById('phint').textContent=`💡 ${w.hint}`;document.getElementById('btnHint').disabled=true;hints++;updateStats();saveSR();}
+function doHint(){hintUsed=true;const w=words[widx];S(w.idx).hints++;document.getElementById('phint').textContent=`💡 ${w.hint}`;document.getElementById('btnHint').disabled=true;hints++;updateStats();saveSR();}
 function doNext(){document.getElementById('mnemPanel').className='mnem';widx++;loadWord();}
 function updateStats(){document.getElementById('sCorr').textContent=correct;document.getElementById('sWrong').textContent=wrong;document.getElementById('sHints').textContent=hints;document.getElementById('sStreak').textContent=streak;}
 
@@ -1718,7 +1788,7 @@ function showMnem(w){const p=document.getElementById('mnemPanel');p.className='m
 // ===== SCHEDULE TAB =====
 function renderSchedule(){
   const c=document.getElementById('schedContent');
-  const sorted=VOCAB.map((w,i)=>({...w,idx:i,...srData[i]})).filter(w=>w.seen>0).sort((a,b)=>a.due-b.due);
+  const sorted=VOCAB.map((w,i)=>({...w,idx:i,...S(i)})).filter(w=>w.seen>0&&isFirst(w.idx)).sort((a,b)=>a.due-b.due);
   if(!sorted.length){c.innerHTML='<div class="empty">Practica palabras para que aparezcan en la agenda.</div>';return;}
   c.innerHTML=sorted.map(w=>{
     const ms=w.due-Date.now(),due=ms<=0,soon=ms<86400000&&ms>0;
